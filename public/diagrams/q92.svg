@@ -1,0 +1,97 @@
+<svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <!-- Cross section on the left -->
+  <g transform="translate(10, 20)">
+    <rect width="140" height="200" fill="#f8fafc" stroke="#cbd5e1" rx="4"/>
+    <text x="70" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="#334155">Hollow Wire</text>
+    
+    <!-- Outer circle -->
+    <circle cx="70" cy="115" r="55" fill="#e2e8f0" stroke="#475569" stroke-width="2"/>
+    <!-- Inner hollow circle -->
+    <circle cx="70" cy="115" r="28" fill="#ffffff" stroke="#475569" stroke-width="2"/>
+    
+    <!-- Current dots -->
+    <circle cx="50" cy="80" r="2.5" fill="#0284c7"/>
+    <circle cx="90" cy="80" r="2.5" fill="#0284c7"/>
+    <circle cx="50" cy="150" r="2.5" fill="#0284c7"/>
+    <circle cx="90" cy="150" r="2.5" fill="#0284c7"/>
+    <circle cx="30" cy="115" r="2.5" fill="#0284c7"/>
+    <circle cx="110" cy="115" r="2.5" fill="#0284c7"/>
+    
+    <!-- Center and radius lines -->
+    <circle cx="70" cy="115" r="2" fill="#0f172a"/>
+    <line x1="70" y1="115" x2="98" y2="115" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="84" y="110" font-size="11" font-weight="bold" fill="#dc2626">R</text>
+    
+    <line x1="70" y1="115" x2="70" y2="60" stroke="#dc2626" stroke-width="1.5"/>
+    <text x="74" y="90" font-size="11" font-weight="bold" fill="#dc2626">2R</text>
+  </g>
+
+  <!-- 5 Candidate Graphs -->
+  <!-- Graph A -->
+  <g transform="translate(170, 20)">
+    <rect width="90" height="90" fill="#f8fafc" stroke="#e2e8f0" rx="3"/>
+    <text x="12" y="18" font-size="12" font-weight="bold" fill="#1e293b">(A)</text>
+    <line x1="20" y1="75" x2="80" y2="75" stroke="#64748b" stroke-width="1.5"/>
+    <line x1="20" y1="75" x2="20" y2="25" stroke="#64748b" stroke-width="1.5"/>
+    <text x="45" y="86" font-size="9" fill="#64748b">R</text>
+    <text x="65" y="86" font-size="9" fill="#64748b">2R</text>
+    <!-- Curve: linear then flat -->
+    <path d="M 20 75 L 45 45 L 80 45" fill="none" stroke="#2563eb" stroke-width="2"/>
+  </g>
+
+  <!-- Graph B -->
+  <g transform="translate(275, 20)">
+    <rect width="90" height="90" fill="#f8fafc" stroke="#e2e8f0" rx="3"/>
+    <text x="12" y="18" font-size="12" font-weight="bold" fill="#1e293b">(B)</text>
+    <line x1="20" y1="75" x2="80" y2="75" stroke="#64748b" stroke-width="1.5"/>
+    <line x1="20" y1="75" x2="20" y2="25" stroke="#64748b" stroke-width="1.5"/>
+    <text x="45" y="86" font-size="9" fill="#64748b">R</text>
+    <text x="65" y="86" font-size="9" fill="#64748b">2R</text>
+    <!-- Curve: linear from 0 to 2R then decay -->
+    <path d="M 20 75 L 65 35 Q 72 50 80 60" fill="none" stroke="#2563eb" stroke-width="2"/>
+  </g>
+
+  <!-- Graph C -->
+  <g transform="translate(380, 20)">
+    <rect width="90" height="90" fill="#f8fafc" stroke="#e2e8f0" rx="3"/>
+    <text x="12" y="18" font-size="12" font-weight="bold" fill="#1e293b">(C)</text>
+    <line x1="20" y1="75" x2="80" y2="75" stroke="#64748b" stroke-width="1.5"/>
+    <line x1="20" y1="75" x2="20" y2="25" stroke="#64748b" stroke-width="1.5"/>
+    <text x="45" y="86" font-size="9" fill="#64748b">R</text>
+    <text x="65" y="86" font-size="9" fill="#64748b">2R</text>
+    <!-- Curve: constant then decay -->
+    <path d="M 20 40 L 45 40 Q 60 55 80 65" fill="none" stroke="#2563eb" stroke-width="2"/>
+  </g>
+
+  <!-- Graph D -->
+  <g transform="translate(485, 20)">
+    <rect width="90" height="90" fill="#f8fafc" stroke="#e2e8f0" rx="3"/>
+    <text x="12" y="18" font-size="12" font-weight="bold" fill="#1e293b">(D)</text>
+    <line x1="20" y1="75" x2="80" y2="75" stroke="#64748b" stroke-width="1.5"/>
+    <line x1="20" y1="75" x2="20" y2="25" stroke="#64748b" stroke-width="1.5"/>
+    <text x="45" y="86" font-size="9" fill="#64748b">R</text>
+    <text x="65" y="86" font-size="9" fill="#64748b">2R</text>
+    <!-- Curve: 0 until 2R, step up and decay -->
+    <path d="M 20 75 L 65 75 L 65 35 Q 72 50 80 60" fill="none" stroke="#2563eb" stroke-width="2"/>
+  </g>
+
+  <!-- Graph E (Correct) -->
+  <g transform="translate(590, 20)">
+    <rect width="90" height="90" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5" rx="3"/>
+    <text x="12" y="18" font-size="12" font-weight="bold" fill="#15803d">(E)</text>
+    <line x1="20" y1="75" x2="80" y2="75" stroke="#64748b" stroke-width="1.5"/>
+    <line x1="20" y1="75" x2="20" y2="25" stroke="#64748b" stroke-width="1.5"/>
+    <text x="45" y="86" font-size="9" fill="#64748b">R</text>
+    <text x="65" y="86" font-size="9" fill="#64748b">2R</text>
+    <!-- Curve: 0 from 0 to R, rises smoothly from R to 2R, decays 1/r -->
+    <path d="M 20 75 L 45 75 Q 55 60 65 35 Q 72 50 80 60" fill="none" stroke="#16a34a" stroke-width="2.5"/>
+  </g>
+
+  <!-- Bottom Labels -->
+  <g transform="translate(170, 130)">
+    <text x="0" y="20" font-size="13" fill="#334155" font-weight="500">B(r) vs r graphs for hollow cylinder of radii R and 2R.</text>
+    <text x="0" y="40" font-size="12" fill="#64748b">Inside the hollow core (r &lt; R): B = 0.</text>
+    <text x="0" y="58" font-size="12" fill="#64748b">In the conductor (R &lt; r &lt; 2R): B increases smoothly from 0 to B_max at 2R.</text>
+    <text x="0" y="76" font-size="12" fill="#64748b">Outside (r &gt; 2R): B falls off inversely with distance (1/r).</text>
+  </g>
+</svg>

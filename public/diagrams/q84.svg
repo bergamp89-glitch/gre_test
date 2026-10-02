@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 140" width="100%" height="100%">
+  <rect width="380" height="140" fill="#fcfcfd" rx="6"/>
+  <!-- x-axis -->
+  <line x1="40" y1="90" x2="340" y2="90" stroke="#0f172a" stroke-width="1.5"/>
+  <polygon points="340,90 332,86 332,94" fill="#0f172a"/>
+  <text x="345" y="94" font-family="serif" font-size="14" font-style="italic">x</text>
+  
+  <!-- Vertical tick at origin 0 -->
+  <line x1="60" y1="60" x2="60" y2="95" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="60" y="112" font-family="serif" font-size="14" text-anchor="middle">0</text>
+  
+  <!-- Vertical tick at L -->
+  <line x1="290" y1="60" x2="290" y2="95" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="290" y="112" font-family="serif" font-size="14" font-style="italic" text-anchor="middle">L</text>
+  
+  <!-- Rod of length L and mass M (from x=60 to x=290, width=230px, height=20px) -->
+  <rect x="60" y="65" width="230" height="18" fill="url(#densityGrad)" stroke="#0f172a" stroke-width="2"/>
+  
+  <!-- Center of mass marker at 2/3 L (x = 60 + 2/3*230 = 60 + 153.3 = 213.3) -->
+  <circle cx="213.3" cy="74" r="4" fill="#ef4444"/>
+  <text x="213.3" y="52" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ef4444" text-anchor="middle">x_cm = 2/3 L</text>
+  
+  <defs>
+    <!-- Linear gradient showing density increasing with x -->
+    <linearGradient id="densityGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+</svg>

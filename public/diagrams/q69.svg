@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 180" width="100%" height="100%">
+  <rect width="340" height="180" fill="#fcfcfd" rx="6"/>
+  <!-- AC voltage source Vi -->
+  <circle cx="60" cy="90" r="16" fill="none" stroke="#0f172a" stroke-width="2"/>
+  <path d="M 52 90 Q 56 82 60 90 Q 64 98 68 90" fill="none" stroke="#0f172a" stroke-width="2"/>
+  <text x="32" y="95" font-family="serif" font-size="14" font-style="italic" font-weight="bold">Vᵢ</text>
+  
+  <!-- Wire from Vi top to series Resistor -->
+  <line x1="60" y1="74" x2="60" y2="40" stroke="#0f172a" stroke-width="2"/>
+  <line x1="60" y1="40" x2="110" y2="40" stroke="#0f172a" stroke-width="2"/>
+  
+  <!-- Resistor zigzag -->
+  <path d="M 110 40 L 115 32 L 123 48 L 131 32 L 139 48 L 147 32 L 155 48 L 160 40" fill="none" stroke="#0f172a" stroke-width="2"/>
+  <line x1="160" y1="40" x2="220" y2="40" stroke="#0f172a" stroke-width="2"/>
+  
+  <!-- Parallel Capacitor C -->
+  <line x1="220" y1="40" x2="220" y2="75" stroke="#0f172a" stroke-width="2"/>
+  <line x1="205" y1="75" x2="235" y2="75" stroke="#0f172a" stroke-width="3"/>
+  <line x1="205" y1="85" x2="235" y2="85" stroke="#0f172a" stroke-width="3"/>
+  <line x1="220" y1="85" x2="220" y2="140" stroke="#0f172a" stroke-width="2"/>
+  
+  <!-- Output terminals Vo -->
+  <line x1="220" y1="40" x2="280" y2="40" stroke="#0f172a" stroke-width="2"/>
+  <circle cx="280" cy="40" r="3" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+  
+  <line x1="60" y1="106" x2="60" y2="140" stroke="#0f172a" stroke-width="2"/>
+  <line x1="60" y1="140" x2="280" y2="140" stroke="#0f172a" stroke-width="2"/>
+  <circle cx="280" cy="140" r="3" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+  
+  <text x="295" y="95" font-family="serif" font-size="14" font-style="italic" font-weight="bold">Vₒ</text>
+  
+  <text x="170" y="170" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Low-Pass Filter: G(ω) = Vₒ / Vᵢ = 1 / √(1 + (ωRC)²)</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200" width="100%" height="100%">
+  <rect width="380" height="200" fill="#fcfcfd" rx="6"/>
+  <!-- Principal optical axis -->
+  <line x1="30" y1="110" x2="350" y2="110" stroke="#0f172a" stroke-width="1.5"/>
+  
+  <!-- Convex spherical mirror (curved reflecting surface facing left) -->
+  <!-- Center of curvature C is to the right at x=280, radius R=90px, vertex at x=190 -->
+  <path d="M 175 40 A 100 100 0 0 1 175 180" fill="none" stroke="#2563eb" stroke-width="3"/>
+  <!-- Mirror backing hatching -->
+  <path d="M 178 50 L 186 46 M 183 75 L 191 71 M 186 100 L 194 96 M 187 125 L 195 121 M 185 150 L 193 146 M 180 170 L 188 166" stroke="#94a3b8" stroke-width="1.5"/>
+  
+  <!-- Center of curvature C -->
+  <circle cx="275" cy="110" r="3" fill="#0f172a"/>
+  <text x="275" y="130" font-family="serif" font-size="14" font-weight="bold" text-anchor="middle">C</text>
+  
+  <!-- Object O at distance R to the left of mirror vertex (x = 190 - 90 = 100) -->
+  <line x1="100" y1="110" x2="100" y2="60" stroke="#0f172a" stroke-width="2.5"/>
+  <polygon points="100,55 95,65 105,65" fill="#0f172a"/>
+  <text x="100" y="130" font-family="serif" font-size="14" font-style="italic" font-weight="bold" text-anchor="middle">O</text>
+  
+  <!-- Dimension R between O and mirror -->
+  <line x1="100" y1="145" x2="190" y2="145" stroke="#475569" stroke-width="1.2"/>
+  <line x1="100" y1="140" x2="100" y2="150" stroke="#475569" stroke-width="1.2"/>
+  <line x1="190" y1="140" x2="190" y2="150" stroke="#475569" stroke-width="1.2"/>
+  <text x="145" y="160" font-family="serif" font-size="13" font-style="italic" font-weight="bold" text-anchor="middle">R</text>
+  
+  <!-- Image location: at R/3 behind mirror (x = 190 + 30 = 220), upright -->
+  <line x1="220" y1="110" x2="220" y2="93" stroke="#10b981" stroke-width="2" stroke-dasharray="3,2"/>
+  <polygon points="220,90 216,97 224,97" fill="#10b981"/>
+  <text x="220" y="130" font-family="serif" font-size="12" font-weight="bold" fill="#059669" text-anchor="middle">Image (R/3)</text>
+</svg>

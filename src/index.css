@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#e6ebf0] text-[#333333] font-sans antialiased m-0 p-0 select-none;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@media print {
+  html, body {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+.select-none {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+img, canvas, svg, a {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+
+@layer components {
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1; 
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; 
+  }
+
+  /* Grid Buttons */
+  .grid-btn {
+    @apply h-[27px] border rounded-sm flex items-center justify-center text-[11px] font-semibold bg-white text-gray-600 border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer select-none;
+  }
+  .grid-btn.current {
+    @apply bg-[#1a446b] text-white border-[#1a446b] hover:bg-[#153655] shadow-sm;
+  }
+  
+  /* Status Badges */
+  .badge-outline {
+    @apply border px-2.5 py-0.5 rounded-sm text-[9.5px] font-bold tracking-wider uppercase;
+  }
+  .badge-outline.multiple-choice {
+    @apply border-gray-300 text-gray-500 bg-white;
+  }
+  .badge-outline.not-started {
+    @apply border-gray-300 text-gray-500 bg-white;
+  }
+
+  /* Right Sidebar Section Titles */
+  .rs-title {
+    @apply text-[9.5px] font-bold text-[#6f93b5] uppercase tracking-wider mb-1.5;
+  }
+  
+  /* Main Action Buttons */
+  .action-btn {
+    @apply px-4 sm:px-5 py-1.5 rounded-sm text-xs sm:text-[12px] font-bold tracking-wider uppercase transition-all duration-200 border cursor-pointer bg-[#1a446b] border-[#1a446b] text-white hover:bg-[#153655] shadow-sm hover:shadow-md;
+  }
+  .action-btn:disabled {
+    @apply bg-white border-gray-200 text-gray-400 cursor-not-allowed shadow-none hover:shadow-none hover:bg-white;
+  }
+  .action-btn.evaluated {
+    @apply cursor-default hover:shadow-sm hover:bg-opacity-100;
+  }
+  .action-btn.evaluated.correct {
+    @apply bg-[#059669] border-[#059669] text-white;
+  }
+  .action-btn.evaluated.review {
+    @apply bg-[#e11d48] border-[#e11d48] text-white;
+  }
+}

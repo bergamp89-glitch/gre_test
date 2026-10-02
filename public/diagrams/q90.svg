@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 260" width="100%" height="100%">
+  <rect width="340" height="260" fill="#fcfcfd" rx="6"/>
+  <!-- Center marker -->
+  <circle cx="170" cy="130" r="3" fill="#0f172a"/>
+  
+  <!-- Outer shell radius b, charge -Q -->
+  <circle cx="170" cy="130" r="80" fill="none" stroke="#0f172a" stroke-width="2"/>
+  <text x="255" y="110" font-family="serif" font-size="15" font-weight="bold" fill="#ef4444">-Q</text>
+  
+  <!-- Radius b arrow (upward) -->
+  <line x1="170" y1="130" x2="170" y2="50" stroke="#475569" stroke-width="1.2"/>
+  <polygon points="170,50 167,58 173,58" fill="#475569"/>
+  <text x="180" y="85" font-family="serif" font-size="14" font-style="italic">b</text>
+  
+  <!-- Inner shell radius a, charge +Q -->
+  <circle cx="170" cy="130" r="40" fill="none" stroke="#0f172a" stroke-width="2"/>
+  <text x="110" y="115" font-family="serif" font-size="15" font-weight="bold" fill="#2563eb">+Q</text>
+  
+  <!-- Radius a arrow -->
+  <line x1="170" y1="130" x2="135" y2="150" stroke="#475569" stroke-width="1.2"/>
+  <polygon points="135,150 143,148 140,143" fill="#475569"/>
+  <text x="150" y="160" font-family="serif" font-size="14" font-style="italic">a</text>
+  
+  <!-- Region labels -->
+  <!-- Region I: a < r < b -->
+  <text x="195" y="140" font-family="serif" font-size="14" font-weight="bold">I</text>
+  <!-- Region II: r > b -->
+  <text x="260" y="140" font-family="serif" font-size="14" font-weight="bold">II</text>
+  
+  <text x="170" y="240" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Inner shell at zero potential (V(a) = 0)</text>
+</svg>

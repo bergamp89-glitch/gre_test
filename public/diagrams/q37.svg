@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 260" width="100%" height="100%">
+  <rect width="340" height="260" fill="#fcfcfd" rx="6"/>
+  <!-- Axes -->
+  <line x1="30" y1="200" x2="310" y2="200" stroke="#475569" stroke-width="1.5"/>
+  <polygon points="310,200 302,196 302,204" fill="#475569"/>
+  <text x="315" y="204" font-family="serif" font-size="14" font-style="italic">x</text>
+  
+  <line x1="170" y1="230" x2="170" y2="30" stroke="#475569" stroke-width="1.5"/>
+  <polygon points="170,30 166,38 174,38" fill="#475569"/>
+  <text x="175" y="28" font-family="serif" font-size="14" font-style="italic">y</text>
+  
+  <!-- Charges -->
+  <!-- -q at (-l/2, 0) -->
+  <circle cx="110" cy="200" r="5" fill="#ef4444"/>
+  <text x="110" y="190" font-family="serif" font-size="14" font-weight="bold" fill="#ef4444" text-anchor="middle">-q</text>
+  <text x="110" y="222" font-family="serif" font-size="12" fill="#475569" text-anchor="middle">(-ℓ/2, 0)</text>
+  
+  <!-- +q at (l/2, 0) -->
+  <circle cx="230" cy="200" r="5" fill="#3b82f6"/>
+  <text x="230" y="190" font-family="serif" font-size="14" font-weight="bold" fill="#2563eb" text-anchor="middle">+q</text>
+  <text x="230" y="222" font-family="serif" font-size="12" fill="#475569" text-anchor="middle">(ℓ/2, 0)</text>
+  
+  <!-- Point P at (0, r) -->
+  <circle cx="170" cy="70" r="4" fill="#0f172a"/>
+  <text x="180" y="74" font-family="serif" font-size="13" font-weight="bold">P (0, r)</text>
+  
+  <!-- Field arrow at P: pointing in -x direction -->
+  <line x1="170" y1="70" x2="125" y2="70" stroke="#10b981" stroke-width="2.5"/>
+  <polygon points="125,70 133,66 133,74" fill="#10b981"/>
+  <text x="135" y="60" font-family="serif" font-size="13" font-weight="bold" fill="#059669">E (-x direction)</text>
+</svg>
