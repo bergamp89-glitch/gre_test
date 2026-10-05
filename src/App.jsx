@@ -907,22 +907,6 @@ function App() {
     setIsSubmitting(false);
   };
 
-  const handleStartPractice = () => {
-    const trimmedFirstName = (registration.firstName || 'Candidate').trim();
-    const trimmedLastName = (registration.lastName || 'Student').trim();
-    const trimmedEmail = (registration.email || 'student@gmail.com').trim().toLowerCase();
-    
-    setRegistration({
-      firstName: trimmedFirstName,
-      lastName: trimmedLastName,
-      email: trimmedEmail
-    });
-    setQuestions([]);
-    setCurrentIndex(0);
-    window.location.hash = '#/exam';
-    setAppState('EXAM');
-  };
-
   // --- Render Home Screen ---
   if (appState === 'HOME') {
     return (
@@ -933,7 +917,6 @@ function App() {
           registrationErrors={registrationErrors}
           setRegistrationErrors={setRegistrationErrors}
           handleStartExam={handleStartExam}
-          handleStartPractice={handleStartPractice}
           isSubmitting={isSubmitting}
         />
         <FaceRegistrationModal

@@ -6,7 +6,6 @@ function HomePage({
   registrationErrors, 
   setRegistrationErrors, 
   handleStartExam, 
-  handleStartPractice,
   isSubmitting
 }) {
   return (
@@ -19,21 +18,9 @@ function HomePage({
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
              </svg>
           </div>
-          <div className="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-             <div>
-               <div className="text-[10.5px] sm:text-xs font-bold text-[#8baecf] uppercase tracking-widest mb-1 sm:mb-1.5">GRE® Physics Subject Test (GR0877)</div>
-               <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-wide text-white">GRE Physics Official Practice Exam</h1>
-             </div>
-             <a
-               href="#/admin"
-               className="self-start sm:self-center text-xs font-semibold text-blue-200 hover:text-white bg-white/10 hover:bg-white/20 border border-white/20 px-3 py-1.5 rounded transition-colors flex items-center gap-1.5"
-               title="Admin boshqaruv paneliga o'tish"
-             >
-               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-               </svg>
-               <span>Admin</span>
-             </a>
+          <div className="relative z-10">
+             <div className="text-[10.5px] sm:text-xs font-bold text-[#8baecf] uppercase tracking-widest mb-1 sm:mb-1.5">GRE® Physics Subject Test (GR0877)</div>
+             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-wide text-white">GRE Physics Official Practice Exam</h1>
           </div>
         </div>
         
@@ -110,26 +97,13 @@ function HomePage({
                type="button"
                onClick={handleStartExam} 
                disabled={isSubmitting}
-               className={`w-full sm:w-auto text-white px-8 py-3.5 sm:px-10 sm:py-4 rounded-md font-bold tracking-widest text-xs sm:text-sm md:text-[14px] transition-all flex items-center justify-center gap-2.5 shadow-md ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#1a446b] hover:bg-[#153655] hover:shadow-lg hover:-translate-y-0.5'}`}
+               className={`w-full sm:w-auto text-white px-8 py-3.5 sm:px-12 sm:py-4 rounded-md font-bold tracking-widest text-xs sm:text-sm md:text-[15px] transition-all flex items-center justify-center gap-2.5 ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#1a446b] hover:bg-[#153655] hover:shadow-lg hover:-translate-y-0.5'}`}
              >
                <svg className="w-5 h-5 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                </svg>
                PROCTORED & FACE ID
-             </button>
-
-             <button 
-               type="button"
-               onClick={handleStartPractice} 
-               disabled={isSubmitting}
-               className="w-full sm:w-auto text-[#1a446b] hover:text-[#153655] bg-slate-50 hover:bg-slate-100 border-2 border-[#1a446b]/30 hover:border-[#1a446b] px-6 py-3.5 sm:px-8 sm:py-4 rounded-md font-bold tracking-wider text-xs sm:text-sm md:text-[14px] transition-all flex items-center justify-center gap-2"
-               title="Kamera va Face ID siz to'g'ridan-to'g'ri savollarni yechish"
-             >
-               <svg className="w-5 h-5 text-[#1a446b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-               </svg>
-               PRACTICE MODE
              </button>
           </div>
         </div>
