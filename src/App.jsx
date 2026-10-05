@@ -66,6 +66,7 @@ function App() {
   const [adminApprovedDescriptor, setAdminApprovedDescriptor] = useState(null);
 
   const [adminCreds, setAdminCreds] = useState({ firstName: 'admin', email: '0807' });
+  const [superuserCreds, setSuperuserCreds] = useState({ firstName: 'Super', lastName: 'User', email: 'super@gmail.com' });
   const [isAdminAuth, setIsAdminAuth] = useState(() => {
     return typeof window !== 'undefined' ? localStorage.getItem('gre_admin_auth') === 'true' : false;
   });
@@ -157,9 +158,10 @@ function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // Anti-cheat protection — faqat EXAM holatida ishlaydi
+  // Anti-cheat protection — faqat EXAM holatida ishlaydi (superuser uchun o'chirilgan)
   useEffect(() => {
     if (appState !== 'EXAM') return;
+    if (registration?.isSuperUser) return;
 
     const handleKeyDown = (e) => {
       // Prevent F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+P, Ctrl+S, Ctrl+C
@@ -207,6 +209,8 @@ function App() {
       if (data) {
         const admin = data.find(d => d.key === 'admin_creds');
         if (admin) setAdminCreds(admin.value);
+        const superuser = data.find(d => d.key === 'superuser_creds');
+        if (superuser && superuser.value) setSuperuserCreds(superuser.value);
       }
     }
     loadSettings();
@@ -680,6 +684,47 @@ function App() {
       return;
     }
 
+    // Check if Superuser (Admin tasdiqlashisiz va Face ID dan o'tmasdan to'g'ridan-to'g'ri testga kirish)
+    const targetSuperEmail = (superuserCreds?.email || 'super@gmail.com').trim().toLowerCase();
+    const isSuperUser = (
+      trimmedEmail === targetSuperEmail || 
+      trimmedEmail === 'super@gmail.com' || 
+      trimmedEmail === 'superuser@gmail.com'
+    );
+
+    if (isSuperUser) {
+      const superRegistration = {
+        firstName: trimmedFirstName || superuserCreds?.firstName || 'Super',
+        lastName: trimmedLastName || superuserCreds?.lastName || 'User',
+        email: trimmedEmail,
+        isSuperUser: true
+      };
+
+      setRegistration(superRegistration);
+      setQuestions([]);
+      setCurrentIndex(0);
+
+      try {
+        const { data: newSession } = await supabase
+          .from(TABLES.EXAM_SESSIONS)
+          .insert([{ 
+            email: trimmedEmail, 
+            registration: superRegistration, 
+            app_state: 'EXAM' 
+          }])
+          .select();
+        if (newSession && newSession.length > 0) {
+          setSessionId(newSession[0].id);
+        }
+      } catch (e) {
+        console.error("Superuser session creation error:", e);
+      }
+
+      window.location.hash = '#/exam';
+      setAppState('EXAM');
+      return;
+    }
+
     if (isFirstNameValid && isLastNameValid && isEmailValid) {
       setIsSubmitting(true);
       try {
@@ -971,6 +1016,8 @@ function App() {
         setRegistration={setRegistration} 
         adminCreds={adminCreds} 
         setAdminCreds={setAdminCreds} 
+        superuserCreds={superuserCreds}
+        setSuperuserCreds={setSuperuserCreds}
       />
     );
   }
@@ -997,7 +1044,14 @@ function App() {
       <header className="min-h-[48px] md:h-[50px] py-2 md:py-0 bg-[#1a446b] text-white flex flex-col md:flex-row justify-between items-center px-4 md:px-6 flex-shrink-0 gap-2 md:gap-0">
         <div className="text-center md:text-left">
           <div className="text-[9px] text-[#8baecf] font-bold tracking-widest uppercase mb-[1px]">Official GRE® Subject Test</div>
-          <h1 className="text-[14px] md:text-[16px] font-semibold tracking-wide">GRE Physics (GR0877) — 100-Question Exam Workspace</h1>
+          <div className="flex items-center gap-2">
+            <h1 className="text-[14px] md:text-[16px] font-semibold tracking-wide">GRE Physics (GR0877) — 100-Question Exam Workspace</h1>
+            {registration?.isSuperUser && (
+              <span className="text-[10px] bg-amber-400 text-slate-900 font-extrabold px-2 py-0.5 rounded tracking-wider uppercase shadow-sm">
+                SUPERUSER
+              </span>
+            )}
+          </div>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-1.5 md:gap-3">
           <div className="bg-[#153655] rounded-sm px-3 py-1 border border-[#1a446b] flex flex-col items-center">
@@ -1217,9 +1271,11 @@ function App() {
       </main>
 
       {/* Real-time AI Face Proctoring Widget */}
-      <FaceProctoringWidget 
-        studentName={`${registration.firstName || ''} ${registration.lastName || ''}`} 
-      />
+      {!registration?.isSuperUser && (
+        <FaceProctoringWidget 
+          studentName={`${registration.firstName || ''} ${registration.lastName || ''}`} 
+        />
+      )}
 
       {/* Anti-Screenshot & Anti-Screen-Recording Security Shield */}
       <AntiScreenCaptureShield 

@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS gre_settings (
 );
 
 INSERT INTO gre_settings (key, value) VALUES 
-('admin_creds', '{"firstName": "admin", "lastName": "Doe", "email": "0807"}')
+('admin_creds', '{"firstName": "admin", "lastName": "Doe", "email": "0807"}'),
+('superuser_creds', '{"firstName": "Super", "lastName": "User", "email": "super@gmail.com"}')
 ON CONFLICT (key) DO NOTHING;
 
 ALTER TABLE gre_settings ENABLE ROW LEVEL SECURITY;

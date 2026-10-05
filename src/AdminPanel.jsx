@@ -5,7 +5,9 @@ function AdminPanel({
   setAppState, 
   setRegistration, 
   adminCreds, 
-  setAdminCreds 
+  setAdminCreds,
+  superuserCreds,
+  setSuperuserCreds
 }) {
   const [requests, setRequests] = useState([]);
   const [activeTab, setActiveTab] = useState(() => {
@@ -567,53 +569,116 @@ function AdminPanel({
                      </>
                    )}
                 </div>
-              )}
+                      {activeTab === 'passwords' && (
+                 <div className="space-y-8">
+                   <div>
+                     <h2 className="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Admin Credentials</h2>
+                     <div className="bg-gray-50 border border-gray-200 p-6 rounded-sm space-y-4 max-w-lg">
+                        <div>
+                           <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">Admin Login (Foydalanuvchi nomi)</label>
+                           <input 
+                             type="text" 
+                             value={adminCreds?.firstName || ''} 
+                             onChange={e => setAdminCreds(prev => ({ ...prev, firstName: e.target.value }))} 
+                             placeholder="admin"
+                             className="w-full border border-gray-300 rounded-sm px-3 py-2.5 text-sm focus:outline-none focus:border-[#1a446b] focus:ring-1 focus:ring-[#1a446b]/20" 
+                           />
+                        </div>
+                        
+                        <div>
+                           <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">Admin Paroli / Maxfiy Kod</label>
+                           <input 
+                             type="text" 
+                             value={adminCreds?.email || ''} 
+                             onChange={e => setAdminCreds(prev => ({ ...prev, email: e.target.value }))} 
+                             placeholder="0807"
+                             className="w-full border border-gray-300 rounded-sm px-3 py-2.5 text-sm focus:outline-none focus:border-[#1a446b] focus:ring-1 focus:ring-[#1a446b]/20" 
+                           />
+                        </div>
+                        <button 
+                          onClick={async () => {
+                             let { error } = await supabase.from(TABLES.SETTINGS).update({ value: adminCreds }).eq('key', 'admin_creds');
+                             if (error) {
+                               const res = await supabase.from(TABLES.SETTINGS).upsert({ key: 'admin_creds', value: adminCreds });
+                               error = res.error;
+                             }
+                             if (!error) {
+                               alert('Admin credentials updated successfully!');
+                             } else {
+                               alert('Xatolik: ' + error.message);
+                             }
+                          }}
+                          className="bg-[#1a446b] text-white px-4 py-3 rounded-sm text-sm font-semibold hover:bg-[#153655] w-full mt-2 transition-colors shadow-sm"
+                        >
+                          Save Admin Changes
+                        </button>
+                     </div>
+                   </div>
 
-              {activeTab === 'passwords' && (
-                 <div>
-                   <h2 className="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Admin Credentials</h2>
-                   <div className="bg-gray-50 border border-gray-200 p-6 rounded-sm space-y-4 max-w-lg">
-                      <div>
-                         <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">Admin Login (Foydalanuvchi nomi)</label>
-                         <input 
-                           type="text" 
-                           value={adminCreds?.firstName || ''} 
-                           onChange={e => setAdminCreds(prev => ({ ...prev, firstName: e.target.value }))} 
-                           placeholder="admin"
-                           className="w-full border border-gray-300 rounded-sm px-3 py-2.5 text-sm focus:outline-none focus:border-[#1a446b] focus:ring-1 focus:ring-[#1a446b]/20" 
-                         />
-                      </div>
-                      
-                      <div>
-                         <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">Admin Paroli / Maxfiy Kod</label>
-                         <input 
-                           type="text" 
-                           value={adminCreds?.email || ''} 
-                           onChange={e => setAdminCreds(prev => ({ ...prev, email: e.target.value }))} 
-                           placeholder="0807"
-                           className="w-full border border-gray-300 rounded-sm px-3 py-2.5 text-sm focus:outline-none focus:border-[#1a446b] focus:ring-1 focus:ring-[#1a446b]/20" 
-                         />
-                      </div>
-                      <button 
-                        onClick={async () => {
-                           let { error } = await supabase.from(TABLES.SETTINGS).update({ value: adminCreds }).eq('key', 'admin_creds');
-                           if (error) {
-                             const res = await supabase.from(TABLES.SETTINGS).upsert({ key: 'admin_creds', value: adminCreds });
-                             error = res.error;
-                           }
-                           if (!error) {
-                             alert('Admin credentials updated successfully!');
-                           } else {
-                             alert('Xatolik: ' + error.message);
-                           }
-                        }}
-                        className="bg-[#1a446b] text-white px-4 py-3 rounded-sm text-sm font-semibold hover:bg-[#153655] w-full mt-2 transition-colors shadow-sm"
-                      >
-                        Save Changes
-                      </button>
-                    </div>
+                   {/* Superuser Credentials */}
+                   <div>
+                     <div className="flex items-center gap-2 mb-2 border-b pb-2">
+                       <h2 className="text-lg font-bold text-gray-800">Superuser Sozlamalari (Imtihonga to'g'ridan-to'g'ri kirish)</h2>
+                       <span className="bg-amber-100 text-amber-800 text-[10px] font-extrabold px-2 py-0.5 rounded uppercase">Bypass Mode</span>
+                     </div>
+                     <p className="text-xs text-gray-600 mb-4">
+                       Superuser admin tasdiqlashisiz va Face ID tekshiruvisiz istalgan paytda to'g'ridan-to'g'ri testga kira oladi.
+                     </p>
+                     <div className="bg-amber-50/40 border border-amber-200 p-6 rounded-sm space-y-4 max-w-lg">
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                             <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">Ism (First Name)</label>
+                             <input 
+                               type="text" 
+                               value={superuserCreds?.firstName || ''} 
+                               onChange={e => setSuperuserCreds(prev => ({ ...prev, firstName: e.target.value }))} 
+                               placeholder="Super"
+                               className="w-full border border-gray-300 rounded-sm px-3 py-2.5 text-sm focus:outline-none focus:border-amber-600 focus:ring-1 focus:ring-amber-600/20 bg-white" 
+                             />
+                          </div>
+                          <div>
+                             <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">Familiya (Last Name)</label>
+                             <input 
+                               type="text" 
+                               value={superuserCreds?.lastName || ''} 
+                               onChange={e => setSuperuserCreds(prev => ({ ...prev, lastName: e.target.value }))} 
+                               placeholder="User"
+                               className="w-full border border-gray-300 rounded-sm px-3 py-2.5 text-sm focus:outline-none focus:border-amber-600 focus:ring-1 focus:ring-amber-600/20 bg-white" 
+                             />
+                          </div>
+                        </div>
+
+                        <div>
+                           <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">Superuser Email (@gmail.com)</label>
+                           <input 
+                             type="email" 
+                             value={superuserCreds?.email || ''} 
+                             onChange={e => setSuperuserCreds(prev => ({ ...prev, email: e.target.value }))} 
+                             placeholder="super@gmail.com"
+                             className="w-full border border-gray-300 rounded-sm px-3 py-2.5 text-sm focus:outline-none focus:border-amber-600 focus:ring-1 focus:ring-amber-600/20 bg-white" 
+                           />
+                        </div>
+                        <button 
+                          onClick={async () => {
+                             let { error } = await supabase.from(TABLES.SETTINGS).update({ value: superuserCreds }).eq('key', 'superuser_creds');
+                             if (error) {
+                               const res = await supabase.from(TABLES.SETTINGS).upsert({ key: 'superuser_creds', value: superuserCreds });
+                               error = res.error;
+                             }
+                             if (!error) {
+                               alert('Superuser ma\'lumotlari muvaffaqiyatli saqlandi!');
+                             } else {
+                               alert('Xatolik: ' + error.message);
+                             }
+                          }}
+                          className="bg-amber-600 text-white px-4 py-3 rounded-sm text-sm font-semibold hover:bg-amber-700 w-full mt-2 transition-colors shadow-sm"
+                        >
+                          Save Superuser Changes
+                        </button>
+                     </div>
+                   </div>
                  </div>
-              )}
+               )}
 
            </div>
         </div>

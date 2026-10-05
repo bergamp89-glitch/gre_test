@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 export default function AntiScreenCaptureShield({ registration = {} }) {
+  if (registration?.isSuperUser) return null;
+
   const [isShieldActive, setIsShieldActive] = useState(false);
   const [shieldReason, setShieldReason] = useState('');
   const triggerTimeoutRef = useRef(null);
