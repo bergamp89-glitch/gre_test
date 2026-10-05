@@ -82,9 +82,14 @@ export async function detectFaceInVideo(video, { isProctoring = false, isVerifyi
       scoreThreshold: (isVerifying || isProctoring) ? 0.30 : 0.38
     });
 
-    const detections = await faceapi
-      .detectAllFaces(video, detectorOptions)
-      .withFaceLandmarks(true);
+    let detections;
+    if (isProctoring) {
+      detections = await faceapi.detectAllFaces(video, detectorOptions);
+    } else {
+      detections = await faceapi
+        .detectAllFaces(video, detectorOptions)
+        .withFaceLandmarks(true);
+    }
 
     if (!detections || detections.length === 0) {
       return {
@@ -105,7 +110,7 @@ export async function detectFaceInVideo(video, { isProctoring = false, isVerifyi
     }
 
     const singleDetection = detections[0];
-    const box = singleDetection.detection.box;
+    const box = singleDetection.detection ? singleDetection.detection.box : singleDetection.box;
     const landmarks = singleDetection.landmarks;
 
     const vW = video.videoWidth;

@@ -389,7 +389,10 @@ function App() {
     };
   }, [appState, requestId, registration]);
 
-  if (appState === 'EXAM' && questions.length === 0) return (
+  const safeIndex = questions.length > 0 ? Math.max(0, Math.min(currentIndex, questions.length - 1)) : 0;
+  const currentQ = questions[safeIndex] || null;
+
+  if (appState === 'EXAM' && (!currentQ || questions.length === 0)) return (
     <div className="min-h-screen flex items-center justify-center bg-[#e6ebf0] font-semibold text-[#1a446b]">
       <div className="flex items-center gap-3 bg-white px-6 py-4 rounded-sm shadow-md">
         <svg className="w-6 h-6 animate-spin text-[#1a446b]" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
@@ -397,8 +400,6 @@ function App() {
       </div>
     </div>
   );
-
-  const currentQ = questions[currentIndex] || null;
   
   const startedCount = questions.filter(q => q.status !== 'Not Started').length;
   const correctCount = questions.filter(q => q.status === 'Correct').length;
@@ -564,7 +565,8 @@ function App() {
       try {
         await supabase.from(TABLES.LEADERBOARD).insert([{
           username: `${registration.firstName || ''} ${registration.lastName || ''}`.trim() || 'Student',
-          score: finalScore
+          score: finalScore,
+          level_num: 1
         }]);
       } catch (err) {
         console.error("Failed to save score to leaderboard:", err);
@@ -692,20 +694,15 @@ function App() {
           // 1. Check if user has an APPROVED record
           const approved = data.find(r => r.status === 'approved');
           if (approved) {
-            // STRICT VALIDATION OF APPROVED CREDENTIALS:
-
-            // A) Ism tekshiruvi (firstName):
+            // Ism va familiya tekshiruvi (to'g'ri yoki almashgan tartibda):
             const approvedFirst = (approved.firstName || '').trim().toLowerCase();
-            if (trimmedFirstName.toLowerCase() !== approvedFirst) {
-              alert(`Xatolik: Kiritilgan ism ("${trimmedFirstName}") admin tasdiqlagan ism ("${approved.firstName}") bilan bir xil bo'lishi shart!`);
-              setIsSubmitting(false);
-              return;
-            }
-
-            // B) Familiya tekshiruvi (lastName):
             const approvedLast = (approved.lastName || '').trim().toLowerCase();
-            if (trimmedLastName.toLowerCase() !== approvedLast) {
-              alert(`Xatolik: Kiritilgan familiya ("${trimmedLastName}") admin tasdiqlagan familiya ("${approved.lastName}") bilan bir xil bo'lishi shart!`);
+
+            const isExact = (trimmedFirstName.toLowerCase() === approvedFirst && trimmedLastName.toLowerCase() === approvedLast);
+            const isSwapped = (trimmedFirstName.toLowerCase() === approvedLast && trimmedLastName.toLowerCase() === approvedFirst);
+
+            if (!isExact && !isSwapped) {
+              alert(`Xatolik: Kiritilgan nomzod ma'lumotlari ("${trimmedFirstName} ${trimmedLastName}") admin tasdiqlagan nomzod ("${approved.firstName} ${approved.lastName}") bilan mos kelmadi!`);
               setIsSubmitting(false);
               return;
             }

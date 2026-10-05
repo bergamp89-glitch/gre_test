@@ -85,7 +85,7 @@ export default function AntiScreenCaptureShield({ registration = {} }) {
         if (!document.hasFocus()) {
           activateShield("Brauzer fokusdan chiqdi (Boshqa ilova yoki skrinshot vositasi ochildi)");
         }
-      }, 350);
+      }, 650);
     };
 
     const handleWindowFocus = () => {

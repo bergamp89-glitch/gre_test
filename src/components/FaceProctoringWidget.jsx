@@ -105,10 +105,12 @@ export default function FaceProctoringWidget({ studentName, onWarning }) {
     }
   };
 
+  const initProctoringRef = useRef(null);
+
   useEffect(() => {
     let isMounted = true;
 
-    async function initProctoring() {
+    async function initProctoring(retryCount = 0) {
       try {
         await loadFaceModels();
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -119,7 +121,8 @@ export default function FaceProctoringWidget({ studentName, onWarning }) {
           return;
         }
 
-        await new Promise(r => setTimeout(r, 200));
+        // Kichik kechikish: modal yopilgach qurilma apparati to'liq bo'shashini ta'minlaydi
+        await new Promise(r => setTimeout(r, retryCount > 0 ? 1200 : 350));
         if (!isMounted) return;
 
         const stream = await navigator.mediaDevices.getUserMedia({
@@ -145,6 +148,7 @@ export default function FaceProctoringWidget({ studentName, onWarning }) {
         setStatus('active');
         setStatusMessage('Nazorat ostida ✓');
 
+        if (checkIntervalRef.current) clearInterval(checkIntervalRef.current);
         checkIntervalRef.current = setInterval(async () => {
           if (!videoRef.current || videoRef.current.readyState < 2 || isCheckingRef.current) return;
           isCheckingRef.current = true;
@@ -177,15 +181,24 @@ export default function FaceProctoringWidget({ studentName, onWarning }) {
         }, 3000);
 
       } catch (err) {
-        console.warn("Proctoring camera init error:", err);
+        console.warn(`Proctoring camera init attempt ${retryCount + 1} error:`, err);
         if (isMounted) {
-          setStatus('error');
-          setStatusMessage("Kamera ulanmadi");
+          if (retryCount < 2) {
+            setStatus('checking');
+            setStatusMessage('Kamera ulanmoqda...');
+            setTimeout(() => {
+              if (isMounted) initProctoring(retryCount + 1);
+            }, 1000);
+          } else {
+            setStatus('error');
+            setStatusMessage("Kamera ulanmadi");
+          }
         }
       }
     }
 
-    initProctoring();
+    initProctoringRef.current = initProctoring;
+    initProctoring(0);
 
     return () => {
       isMounted = false;
@@ -431,12 +444,22 @@ export default function FaceProctoringWidget({ studentName, onWarning }) {
           </div>
 
           {/* Status Footer */}
-          <div className="py-1 px-1.5 bg-slate-950/95 text-[9px] sm:text-[10px] border-t border-slate-800 text-center leading-snug">
+          <div className="py-1 px-1.5 bg-slate-950/95 text-[9px] sm:text-[10px] border-t border-slate-800 text-center leading-snug flex items-center justify-center gap-1.5">
             <span className={`font-bold ${
-              status === 'active' ? 'text-emerald-400' : status === 'warning' ? 'text-rose-400 font-bold' : 'text-slate-300'
+              status === 'active' ? 'text-emerald-400' : status === 'warning' ? 'text-rose-400 font-bold' : status === 'error' ? 'text-rose-400' : 'text-slate-300'
             }`}>
               {statusMessage}
             </span>
+            {status === 'error' && initProctoringRef.current && (
+              <button
+                data-no-drag="true"
+                type="button"
+                onClick={() => initProctoringRef.current(0)}
+                className="text-[9px] bg-blue-600 hover:bg-blue-500 text-white px-1.5 py-0.5 rounded font-bold shadow-sm"
+              >
+                Qayta ulash
+              </button>
+            )}
           </div>
         </div>
       )}

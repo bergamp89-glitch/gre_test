@@ -574,21 +574,23 @@ function AdminPanel({
                    <h2 className="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Admin Credentials</h2>
                    <div className="bg-gray-50 border border-gray-200 p-6 rounded-sm space-y-4 max-w-lg">
                       <div>
-                         <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">First Name</label>
+                         <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">Admin Login (Foydalanuvchi nomi)</label>
                          <input 
                            type="text" 
                            value={adminCreds?.firstName || ''} 
                            onChange={e => setAdminCreds(prev => ({ ...prev, firstName: e.target.value }))} 
+                           placeholder="admin"
                            className="w-full border border-gray-300 rounded-sm px-3 py-2.5 text-sm focus:outline-none focus:border-[#1a446b] focus:ring-1 focus:ring-[#1a446b]/20" 
                          />
                       </div>
                       
                       <div>
-                         <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">Email Address / Code</label>
+                         <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">Admin Paroli / Maxfiy Kod</label>
                          <input 
                            type="text" 
                            value={adminCreds?.email || ''} 
                            onChange={e => setAdminCreds(prev => ({ ...prev, email: e.target.value }))} 
+                           placeholder="0807"
                            className="w-full border border-gray-300 rounded-sm px-3 py-2.5 text-sm focus:outline-none focus:border-[#1a446b] focus:ring-1 focus:ring-[#1a446b]/20" 
                          />
                       </div>
