@@ -569,7 +569,9 @@ function AdminPanel({
                      </>
                    )}
                 </div>
-                      {activeTab === 'passwords' && (
+              )}
+
+              {activeTab === 'passwords' && (
                  <div className="space-y-8">
                    <div>
                      <h2 className="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Admin Credentials</h2>
