@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { supabase, TABLES } from './supabase';
 import AdminPanel from './AdminPanel';
 import AdminLogin from './components/AdminLogin';
+import WelcomePage from './components/WelcomePage';
 import HomePage from './components/HomePage';
 import WaitingPage from './components/WaitingPage';
 import ResultPage from './components/ResultPage';
@@ -13,6 +14,7 @@ import FaceRegistrationModal from './components/FaceRegistrationModal';
 import FaceProctoringWidget from './components/FaceProctoringWidget';
 import AntiScreenCaptureShield from './components/AntiScreenCaptureShield';
 import { examQuestions as q1 } from './test.js';
+import { gmatQuestions } from './questions/gmat.js';
 
 const getInitialSession = () => {
   try {
@@ -34,27 +36,35 @@ const getInitialSession = () => {
     if (hash.includes('result') && parsed && parsed.appState === 'RESULT') {
       return parsed;
     }
+    if (hash.includes('home')) {
+      return { appState: 'HOME', selectedExam: parsed?.selectedExam || 'GRE' };
+    }
+    if (hash.includes('welcome')) {
+      return { appState: 'WELCOME', selectedExam: parsed?.selectedExam || 'GRE' };
+    }
 
     // 2. If no matching hash or on root URL, check saved session or admin auth
-    if (parsed && parsed.appState && parsed.appState !== 'HOME') {
+    if (parsed && parsed.appState && parsed.appState !== 'HOME' && parsed.appState !== 'WELCOME') {
       return parsed;
     }
     if (isAdminAuth) {
       return { appState: 'ADMIN' };
     }
+    return { appState: 'WELCOME', selectedExam: 'GRE' };
   } catch (e) {
     console.error("Session restore failed:", e);
   }
-  return null;
+  return { appState: 'WELCOME', selectedExam: 'GRE' };
 };
 
 function App() {
   const initialSession = getInitialSession();
+  const [selectedExam, setSelectedExam] = useState(initialSession?.selectedExam || 'GRE');
   const [sessionId, setSessionId] = useState(initialSession?.sessionId || null);
   const [questions, setQuestions] = useState(initialSession?.questions || []);
   const [currentIndex, setCurrentIndex] = useState(initialSession?.currentIndex ?? 0);
   const [openDropdownId, setOpenDropdownId] = useState(null); 
-  const [appState, setAppState] = useState(initialSession?.appState || 'HOME'); // 'HOME', 'WAITING', 'ADMIN', 'EXAM', 'RESULT'
+  const [appState, setAppState] = useState(initialSession?.appState || 'WELCOME'); // 'WELCOME', 'HOME', 'WAITING', 'ADMIN', 'EXAM', 'RESULT'
   const [registration, setRegistration] = useState(initialSession?.registration || { firstName: '', lastName: '', email: '' });
   
   const [registrationErrors, setRegistrationErrors] = useState({ firstName: false, lastName: false, email: false });
@@ -91,6 +101,7 @@ function App() {
         sessionId,
         requestId,
         appState,
+        selectedExam,
         questions,
         currentIndex,
         registration
@@ -100,9 +111,14 @@ function App() {
         localStorage.setItem('gre_admin_auth', 'true');
       }
     } else if (appState === 'HOME') {
+      localStorage.setItem('gre_session', JSON.stringify({
+        selectedExam,
+        appState: 'HOME'
+      }));
+    } else if (appState === 'WELCOME') {
       localStorage.removeItem('gre_session');
     }
-  }, [appState, sessionId, requestId, questions, currentIndex, registration, isAdminAuth]);
+  }, [appState, sessionId, requestId, questions, currentIndex, registration, isAdminAuth, selectedExam]);
 
   // Synchronize appState with URL hash
   useEffect(() => {
@@ -124,8 +140,12 @@ function App() {
         window.location.hash = '#/result';
       }
     } else if (appState === 'HOME') {
-      if (window.location.hash && window.location.hash !== '#/' && window.location.hash !== '#/home') {
+      if (!window.location.hash.includes('home')) {
         window.location.hash = '#/home';
+      }
+    } else if (appState === 'WELCOME') {
+      if (window.location.hash && window.location.hash !== '#/' && !window.location.hash.includes('welcome')) {
+        window.location.hash = '#/welcome';
       }
     }
   }, [appState]);
@@ -149,8 +169,10 @@ function App() {
         setAppState('WAITING');
       } else if (hash.includes('result')) {
         setAppState('RESULT');
-      } else if (hash.includes('home') || !hash || hash === '#/') {
+      } else if (hash.includes('home')) {
         setAppState('HOME');
+      } else if (hash.includes('welcome') || !hash || hash === '#/') {
+        setAppState('WELCOME');
       }
     };
 
@@ -217,8 +239,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (appState === 'HOME') {
+    if (appState === 'WELCOME') {
       localStorage.removeItem('gre_session');
+      setQuestions([]);
+      setCurrentIndex(0);
+      setSessionId(null);
+      setRequestId(null);
+    } else if (appState === 'HOME') {
       setQuestions([]);
       setCurrentIndex(0);
       setSessionId(null);
@@ -249,17 +276,21 @@ function App() {
       if (appState === 'EXAM' && questions.length === 0) {
         let rawQuestions = [];
 
-        // Avval bazadan yuklashga urinib ko'ramiz, agar bo'lmasa lokal fayldan olamiz
-        const { data, error } = await supabase
-          .from(TABLES.QUESTIONS)
-          .select('*')
-          .order('id', { ascending: true });
-
-        if (!error && data && data.length >= 100) {
-          rawQuestions = data.map(dbQ => ({ id: dbQ.id, prompt: dbQ.prompt, type: dbQ.type, ...dbQ.data }));
+        if (selectedExam === 'GMAT') {
+          rawQuestions = gmatQuestions;
         } else {
-          // Bazada to'liq 100 savol bo'lmasa yoki ulanish bo'lmasa — 100 talik rasmiy GRE Physics testini lokal yuklaymiz
-          rawQuestions = q1;
+          // GRE: Avval bazadan yuklashga urinib ko'ramiz, agar bo'lmasa lokal fayldan olamiz
+          const { data, error } = await supabase
+            .from(TABLES.QUESTIONS)
+            .select('*')
+            .order('id', { ascending: true });
+
+          if (!error && data && data.length >= 100) {
+            rawQuestions = data.map(dbQ => ({ id: dbQ.id, prompt: dbQ.prompt, type: dbQ.type, ...dbQ.data }));
+          } else {
+            // Bazada to'liq 100 savol bo'lmasa yoki ulanish bo'lmasa — 100 talik rasmiy GRE Physics testini lokal yuklaymiz
+            rawQuestions = q1;
+          }
         }
 
         const shuffleArray = (arr) => {
@@ -344,7 +375,7 @@ function App() {
       }
     }
     loadQuestions();
-  }, [appState, questions.length]);
+  }, [appState, questions.length, selectedExam]);
 
   useEffect(() => {
     let intervalId;
@@ -884,13 +915,21 @@ function App() {
         .ilike('email', trimmedEmail)
         .in('status', ['pending', 'approved']);
         
+      const examLevel = selectedExam === 'GMAT' 
+        ? 'GMAT - Graduate Management Admission Test' 
+        : 'GRE - Graduate Record Examination';
+
       if (data && data.length > 0) {
         const pending = data.find(r => r.status === 'pending');
         if (pending) {
           try {
             await supabase
               .from(TABLES.REQUESTS)
-              .update({ photo: capturedPhoto, descriptor: capturedDescriptor })
+              .update({ 
+                photo: capturedPhoto, 
+                descriptor: capturedDescriptor,
+                level: examLevel
+              })
               .eq('id', pending.id);
           } catch (e) {
             console.warn("Could not update photo in pending request:", e);
@@ -908,7 +947,7 @@ function App() {
         firstName: trimmedFirstName,
         lastName: trimmedLastName,
         email: trimmedEmail,
-        level: 'GRE - Graduate Record Examination',
+        level: examLevel,
         photo: capturedPhoto,
         descriptor: capturedDescriptor,
         status: 'pending'
@@ -926,7 +965,7 @@ function App() {
           firstName: trimmedFirstName,
           lastName: trimmedLastName,
           email: trimmedEmail,
-          level: 'GRE - Graduate Record Examination',
+          level: examLevel,
           photo: capturedPhoto,
           status: 'pending'
         };
@@ -952,6 +991,19 @@ function App() {
     setIsSubmitting(false);
   };
 
+  // --- Render Welcome Screen ---
+  if (appState === 'WELCOME') {
+    return (
+      <WelcomePage
+        onSelectExam={(exam) => {
+          setSelectedExam(exam);
+          setAppState('HOME');
+          window.location.hash = '#/home';
+        }}
+      />
+    );
+  }
+
   // --- Render Home Screen ---
   if (appState === 'HOME') {
     return (
@@ -963,6 +1015,11 @@ function App() {
           setRegistrationErrors={setRegistrationErrors}
           handleStartExam={handleStartExam}
           isSubmitting={isSubmitting}
+          selectedExam={selectedExam}
+          onBackToWelcome={() => {
+            setAppState('WELCOME');
+            window.location.hash = '#/welcome';
+          }}
         />
         <FaceRegistrationModal
           isOpen={showFaceModal}
@@ -974,6 +1031,7 @@ function App() {
           adminApprovedDescriptor={adminApprovedDescriptor}
           registration={registration}
           isSubmitting={isSubmitting}
+          selectedExam={selectedExam}
         />
       </>
     );
@@ -981,7 +1039,7 @@ function App() {
 
   // --- Render Waiting Screen ---
   if (appState === 'WAITING') {
-    return <WaitingPage registration={registration} setAppState={setAppState} />;
+    return <WaitingPage registration={registration} selectedExam={selectedExam} setAppState={setAppState} />;
   }
 
   // --- Render Admin Panel or Admin Login ---
@@ -997,8 +1055,8 @@ function App() {
             window.location.hash = `#/admin?tab=${currentTab}`;
           }} 
           onCancel={() => {
-            window.location.hash = '#/home';
-            setAppState('HOME');
+            window.location.hash = '#/welcome';
+            setAppState('WELCOME');
           }} 
         />
       );
@@ -1011,7 +1069,7 @@ function App() {
             setIsAdminAuth(false);
             localStorage.removeItem('gre_admin_auth');
           }
-          setAppState(newState);
+          setAppState(newState === 'HOME' ? 'WELCOME' : newState);
         }} 
         setRegistration={setRegistration} 
         adminCreds={adminCreds} 
@@ -1029,6 +1087,7 @@ function App() {
         questions={questions} 
         correctCount={correctCount} 
         handleRestartExam={handleRestartExam} 
+        selectedExam={selectedExam}
       />
     );
   }
@@ -1040,12 +1099,18 @@ function App() {
         setOpenDropdownId(null);
       }
     }}>
-      {/* Header - Bo'yiga siqilgan (h-[50px]) */}
+      {/* Header */}
       <header className="min-h-[48px] md:h-[50px] py-2 md:py-0 bg-[#1a446b] text-white flex flex-col md:flex-row justify-between items-center px-4 md:px-6 flex-shrink-0 gap-2 md:gap-0">
         <div className="text-center md:text-left">
-          <div className="text-[9px] text-[#8baecf] font-bold tracking-widest uppercase mb-[1px]">Official GRE® Subject Test</div>
+          <div className="text-[9px] text-[#8baecf] font-bold tracking-widest uppercase mb-[1px]">
+            {selectedExam === 'GMAT' ? 'Official GMAT™ Practice Test' : 'Official GRE® Subject Test'}
+          </div>
           <div className="flex items-center gap-2">
-            <h1 className="text-[14px] md:text-[16px] font-semibold tracking-wide">GRE Physics (GR0877) — 100-Question Exam Workspace</h1>
+            <h1 className="text-[14px] md:text-[16px] font-semibold tracking-wide">
+              {selectedExam === 'GMAT' 
+                ? `GMAT Exam — ${questions.length}-Question Workspace`
+                : `GRE Physics (GR0877) — ${questions.length}-Question Workspace`}
+            </h1>
             {registration?.isSuperUser && (
               <span className="text-[10px] bg-amber-400 text-slate-900 font-extrabold px-2 py-0.5 rounded tracking-wider uppercase shadow-sm">
                 SUPERUSER
@@ -1280,6 +1345,7 @@ function App() {
       {/* Anti-Screenshot & Anti-Screen-Recording Security Shield */}
       <AntiScreenCaptureShield 
         registration={registration} 
+        selectedExam={selectedExam}
       />
     </div>
   );

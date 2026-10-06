@@ -1,11 +1,13 @@
 import React from 'react';
 
-function ResultPage({ questions = [], correctCount = 0, handleRestartExam }) {
+function ResultPage({ questions = [], correctCount = 0, handleRestartExam, selectedExam = 'GRE' }) {
   const total = questions.length || 1;
   const score = Math.round((correctCount / total) * 100);
   const reviewed = total - correctCount;
 
   const isPassed = score >= 70;
+  const isGMAT = selectedExam === 'GMAT';
+  const examName = isGMAT ? 'GMAT™' : 'GRE®';
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#e6ebf0] p-4">
@@ -13,8 +15,8 @@ function ResultPage({ questions = [], correctCount = 0, handleRestartExam }) {
         {/* Header */}
         <div className="bg-[#1a446b] text-white px-8 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <div className="text-[11px] font-bold text-[#8baecf] uppercase tracking-widest mb-1.5">GRE® Physics Exam Summary</div>
-            <h1 className="text-[26px] font-semibold tracking-wide">GRE Physics (GR0877) Test Results</h1>
+            <div className="text-[11px] font-bold text-[#8baecf] uppercase tracking-widest mb-1.5">{examName} Exam Summary</div>
+            <h1 className="text-[26px] font-semibold tracking-wide">{examName} Test Results</h1>
           </div>
           <div>
             <span className={`inline-flex items-center px-4 py-2 rounded text-sm font-bold tracking-wider uppercase shadow-sm ${
@@ -41,7 +43,7 @@ function ResultPage({ questions = [], correctCount = 0, handleRestartExam }) {
             <div>
               <div className="font-bold text-sm">
                 {isPassed 
-                  ? 'Tabriklaymiz! Siz GRE (Graduate Record Examination) talab qilingan o\'tish balidan muvaffaqiyatli o\'tdingiz.' 
+                  ? `Tabriklaymiz! Siz ${examName} talab qilingan o'tish balidan muvaffaqiyatli o'tdingiz.` 
                   : 'Siz talab qilingan minimal 70% o\'tish balini to\'play olmadingiz.'}
               </div>
               <div className="text-xs opacity-90 mt-0.5">

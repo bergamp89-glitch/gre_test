@@ -1,5 +1,5 @@
 -- ============================================================
--- GRE Quiz Platform — Supabase Jadvallari
+-- Practice Exam Platform — Supabase Jadvallari
 -- 1 ta Supabase bazasida 2 ta loyihani to'liq alohida saqlash uchun.
 -- Supabase -> SQL Editor ga quyidagi kodni qo'yib, "Run" tugmasini bosing:
 -- ============================================================
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS gre_requests (
   "firstName" text,
   "lastName" text,
   email text,
-  level text DEFAULT 'GRE - Graduate Record Examination',
+  level text DEFAULT 'Practice Exam',
   photo text,
   descriptor jsonb,
   status text DEFAULT 'pending',

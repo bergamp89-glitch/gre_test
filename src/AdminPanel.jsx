@@ -39,10 +39,22 @@ function AdminPanel({
   const [selectedPhotoUser, setSelectedPhotoUser] = useState(null);
   const [isRefreshingRequests, setIsRefreshingRequests] = useState(false);
 
-  const filterRequests = (list, query) => {
-    if (!query || !query.trim()) return list;
+  const [pendingExamFilter, setPendingExamFilter] = useState('ALL');
+  const [approvedExamFilter, setApprovedExamFilter] = useState('ALL');
+
+  const filterRequests = (list, query, examType = 'ALL') => {
+    let result = list;
+    if (examType && examType !== 'ALL') {
+      result = result.filter(r => {
+        const lvl = (r.level || '').toLowerCase();
+        if (examType === 'GMAT') return lvl.includes('gmat');
+        if (examType === 'GRE') return !lvl.includes('gmat');
+        return true;
+      });
+    }
+    if (!query || !query.trim()) return result;
     const q = query.trim().toLowerCase();
-    return list.filter(r => {
+    return result.filter(r => {
       const fullName = `${r.firstName || ''} ${r.lastName || ''}`.toLowerCase();
       const email = (r.email || '').toLowerCase();
       return fullName.includes(q) || email.includes(q);
@@ -50,10 +62,10 @@ function AdminPanel({
   };
 
   const pendingRequests = requests.filter(r => r.status === 'pending');
-  const filteredPendingRequests = filterRequests(pendingRequests, pendingSearch);
+  const filteredPendingRequests = filterRequests(pendingRequests, pendingSearch, pendingExamFilter);
 
   const approvedRequests = requests.filter(r => r.status === 'approved');
-  const filteredApprovedRequests = filterRequests(approvedRequests, approvedSearch);
+  const filteredApprovedRequests = filterRequests(approvedRequests, approvedSearch, approvedExamFilter);
 
   useEffect(() => {
     if (activeTab === 'dashboard') {
@@ -163,8 +175,8 @@ function AdminPanel({
               onClick={() => {
                 localStorage.removeItem('gre_admin_auth');
                 localStorage.removeItem('gre_admin_tab');
-                window.location.hash = '#/home';
-                setAppState('HOME');
+                window.location.hash = '#/welcome';
+                setAppState('WELCOME');
               }}
               className="text-white/80 hover:text-white flex items-center gap-1.5 text-xs md:text-sm font-medium transition-colors bg-transparent px-2 py-1.5 rounded-sm hover:bg-white/10"
               title="Bosh sahifaga qaytish"
@@ -176,8 +188,8 @@ function AdminPanel({
               onClick={() => { 
                 localStorage.removeItem('gre_admin_auth');
                 localStorage.removeItem('gre_admin_tab');
-                window.location.hash = '#/home';
-                setAppState('HOME'); 
+                window.location.hash = '#/welcome';
+                setAppState('WELCOME'); 
                 setRegistration({ firstName: '', lastName: '', email: '' }); 
               }} 
               className="border border-white/30 hover:bg-white/10 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-sm text-xs md:text-sm font-medium transition-colors"
@@ -228,7 +240,22 @@ function AdminPanel({
                         </h2>
                         
                         <div className="flex flex-wrap items-center gap-2">
-                           <div className="relative w-full sm:w-60">
+                           <div className="inline-flex rounded-sm border border-gray-300 p-0.5 bg-gray-50 text-xs">
+                             {['ALL', 'GRE', 'GMAT'].map(type => (
+                               <button
+                                 key={type}
+                                 onClick={() => setPendingExamFilter(type)}
+                                 className={`px-2.5 py-1 rounded-sm text-xs font-bold transition-all ${
+                                   pendingExamFilter === type 
+                                     ? (type === 'GMAT' ? 'bg-purple-700 text-white shadow-xs' : 'bg-[#1a446b] text-white shadow-xs') 
+                                     : 'text-gray-600 hover:text-gray-900'
+                                 }`}
+                               >
+                                 {type === 'ALL' ? 'Barchasi' : type}
+                               </button>
+                             ))}
+                           </div>
+                           <div className="relative w-full sm:w-52">
                              <input
                                type="text"
                                placeholder="Qidiruv (ism, email)..."
@@ -304,6 +331,13 @@ function AdminPanel({
                                   <div className="min-w-0 flex-1">
                                      <div className="flex items-center gap-2 flex-wrap">
                                        <span className="font-bold text-gray-900 text-sm sm:text-base">{req.firstName} {req.lastName}</span>
+                                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded border shadow-xs ${
+                                         (req.level || '').toLowerCase().includes('gmat')
+                                           ? 'text-purple-800 bg-purple-50 border-purple-200'
+                                           : 'text-blue-800 bg-blue-50 border-blue-200'
+                                       }`}>
+                                         {(req.level || '').toLowerCase().includes('gmat') ? 'GMAT Test' : 'GRE Test'}
+                                       </span>
                                        {req.photo ? (
                                          <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded">
                                            Face ID ✓
@@ -378,25 +412,42 @@ function AdminPanel({
                           </span>
                         </h2>
                         
-                        <div className="relative w-full sm:w-72">
-                          <input
-                            type="text"
-                            placeholder="Qidiruv (ism, email)..."
-                            value={approvedSearch}
-                            onChange={(e) => setApprovedSearch(e.target.value)}
-                            className="w-full pl-9 pr-8 py-1.5 text-xs md:text-sm border border-gray-300 rounded-sm focus:outline-none focus:border-[#1a446b] focus:ring-1 focus:ring-[#1a446b]/20"
-                          />
-                          <svg className="w-4 h-4 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                          </svg>
-                          {approvedSearch && (
-                            <button
-                              onClick={() => setApprovedSearch('')}
-                              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs font-bold"
-                            >
-                              ✕
-                            </button>
-                          )}
+                        <div className="flex flex-wrap items-center gap-2">
+                           <div className="inline-flex rounded-sm border border-gray-300 p-0.5 bg-gray-50 text-xs">
+                             {['ALL', 'GRE', 'GMAT'].map(type => (
+                               <button
+                                 key={type}
+                                 onClick={() => setApprovedExamFilter(type)}
+                                 className={`px-2.5 py-1 rounded-sm text-xs font-bold transition-all ${
+                                   approvedExamFilter === type 
+                                     ? (type === 'GMAT' ? 'bg-purple-700 text-white shadow-xs' : 'bg-[#1a446b] text-white shadow-xs') 
+                                     : 'text-gray-600 hover:text-gray-900'
+                                 }`}
+                               >
+                                 {type === 'ALL' ? 'Barchasi' : type}
+                               </button>
+                             ))}
+                           </div>
+                           <div className="relative w-full sm:w-60">
+                             <input
+                               type="text"
+                               placeholder="Qidiruv (ism, email)..."
+                               value={approvedSearch}
+                               onChange={(e) => setApprovedSearch(e.target.value)}
+                               className="w-full pl-9 pr-8 py-1.5 text-xs md:text-sm border border-gray-300 rounded-sm focus:outline-none focus:border-[#1a446b] focus:ring-1 focus:ring-[#1a446b]/20"
+                             />
+                             <svg className="w-4 h-4 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                             </svg>
+                             {approvedSearch && (
+                               <button
+                                 onClick={() => setApprovedSearch('')}
+                                 className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 text-xs font-bold"
+                               >
+                                 ✕
+                               </button>
+                             )}
+                           </div>
                         </div>
                      </div>
 
@@ -429,7 +480,16 @@ function AdminPanel({
                                    )}
                                  </div>
                                  <div className="min-w-0">
-                                     <div className="font-semibold text-gray-800 text-[13px] md:text-[15px] truncate">{req.firstName} {req.lastName}</div>
+                                     <div className="flex items-center gap-2">
+                                       <span className="font-semibold text-gray-800 text-[13px] md:text-[15px] truncate">{req.firstName} {req.lastName}</span>
+                                       <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${
+                                         (req.level || '').toLowerCase().includes('gmat')
+                                           ? 'text-purple-800 bg-purple-50 border-purple-200'
+                                           : 'text-blue-800 bg-blue-50 border-blue-200'
+                                       }`}>
+                                         {(req.level || '').toLowerCase().includes('gmat') ? 'GMAT' : 'GRE'}
+                                       </span>
+                                     </div>
                                      <div className="text-[11px] md:text-sm text-gray-500 mt-0.5 md:mt-1 truncate flex items-center gap-1.5 flex-wrap">
                                        <span>{req.email}</span>
                                        {req.descriptor && (
@@ -737,6 +797,16 @@ function AdminPanel({
                 <div className="flex justify-between border-b pb-1.5">
                   <span className="text-gray-500 font-medium">Email:</span>
                   <span className="font-semibold text-gray-800 font-mono text-xs">{selectedPhotoUser.email}</span>
+                </div>
+                <div className="flex justify-between border-b pb-1.5">
+                  <span className="text-gray-500 font-medium">Imtihon turi:</span>
+                  <span className={`font-bold text-xs px-2 py-0.5 rounded ${
+                    (selectedPhotoUser.level || '').toLowerCase().includes('gmat') 
+                      ? 'bg-purple-100 text-purple-800' 
+                      : 'bg-blue-100 text-blue-800'
+                  }`}>
+                    {(selectedPhotoUser.level || '').toLowerCase().includes('gmat') ? 'GMAT Test' : 'GRE Test'}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-500 font-medium">Holati:</span>

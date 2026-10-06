@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-export default function AntiScreenCaptureShield({ registration = {} }) {
+export default function AntiScreenCaptureShield({ registration = {}, selectedExam = 'GRE' }) {
   if (registration?.isSuperUser) return null;
 
   const [isShieldActive, setIsShieldActive] = useState(false);
@@ -125,7 +125,8 @@ export default function AntiScreenCaptureShield({ registration = {} }) {
 
   const fullName = `${registration.firstName || ''} ${registration.lastName || ''}`.trim() || 'Nomzod';
   const email = registration.email || '';
-  const watermarkText = `${fullName} • ${email} • GRE - Graduate Record Examination`;
+  const examTag = selectedExam === 'GMAT' ? 'GMAT Exam' : 'GRE Exam';
+  const watermarkText = `${fullName} • ${email} • ${examTag}`;
 
   return (
     <>

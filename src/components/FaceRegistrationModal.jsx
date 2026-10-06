@@ -11,7 +11,8 @@ function FaceRegistrationModal({
   adminApprovedPhoto = null,
   adminApprovedDescriptor = null,
   registration = {},
-  isSubmitting = false
+  isSubmitting = false,
+  selectedExam = 'GRE'
 }) {
   const [cameraStatus, setCameraStatus] = useState('initializing'); // 'initializing' | 'active' | 'no-camera' | 'denied' | 'error'
   const [errorMessage, setErrorMessage] = useState('');
@@ -730,8 +731,8 @@ function FaceRegistrationModal({
           </div>
 
           <div className="flex items-center gap-1.5">
-            <span className="bg-[#1a446b] text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded shadow-sm">
-              GRE - Graduate Record Examination
+            <span className={`${selectedExam === 'GMAT' ? 'bg-purple-700' : 'bg-[#1a446b]'} text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded shadow-sm`}>
+              {selectedExam === 'GMAT' ? 'GMAT Test' : 'GRE Test'}
             </span>
           </div>
         </div>

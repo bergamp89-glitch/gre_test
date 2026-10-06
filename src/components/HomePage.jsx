@@ -6,21 +6,49 @@ function HomePage({
   registrationErrors, 
   setRegistrationErrors, 
   handleStartExam, 
-  isSubmitting
+  isSubmitting,
+  selectedExam = 'GRE',
+  onBackToWelcome
 }) {
+  const isGMAT = selectedExam === 'GMAT';
+  const headerBg = isGMAT ? 'bg-[#4a154b]' : 'bg-[#1a446b]';
+  const accentColor = isGMAT ? 'text-purple-200' : 'text-[#8baecf]';
+  const btnBg = isGMAT 
+    ? 'bg-purple-700 hover:bg-purple-800' 
+    : 'bg-[#1a446b] hover:bg-[#153655]';
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#e6ebf0] p-4">
       <div className="w-full max-w-4xl bg-white rounded-sm shadow-md overflow-hidden">
-        {/* Header - Ixchamlashtirilgan va Responsive */}
-        <div className="bg-[#1a446b] text-white px-5 py-5 sm:px-8 sm:py-6 md:px-10 md:py-7 relative overflow-hidden">
+        {/* Header */}
+        <div className={`${headerBg} text-white px-5 py-5 sm:px-8 sm:py-6 md:px-10 md:py-7 relative overflow-hidden transition-colors duration-300`}>
           <div className="absolute top-0 right-0 opacity-10 transform translate-x-4 -translate-y-4 pointer-events-none">
              <svg className="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
              </svg>
           </div>
-          <div className="relative z-10">
-             <div className="text-[10.5px] sm:text-xs font-bold text-[#8baecf] uppercase tracking-widest mb-1 sm:mb-1.5">GRE® Physics Subject Test (GR0877)</div>
-             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-wide text-white">GRE Physics Official Practice Exam</h1>
+          <div className="relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+             <div>
+               <div className={`text-[10.5px] sm:text-xs font-bold ${accentColor} uppercase tracking-widest mb-1 sm:mb-1.5`}>
+                 {isGMAT ? 'Official GMAT™ Practice Test' : 'Official GRE® Subject Test'}
+               </div>
+               <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-wide text-white">
+                 {isGMAT ? 'GMAT Official Practice Exam' : 'GRE Physics Official Practice Exam'}
+               </h1>
+             </div>
+
+             {onBackToWelcome && (
+               <button
+                 type="button"
+                 onClick={onBackToWelcome}
+                 className="self-start sm:self-center inline-flex items-center gap-1.5 text-xs font-semibold text-white/90 hover:text-white bg-white/10 hover:bg-white/20 border border-white/20 px-3 py-1.5 rounded transition-all shadow-sm"
+               >
+                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                 </svg>
+                 Testni o'zgartirish
+               </button>
+             )}
           </div>
         </div>
         
@@ -29,6 +57,14 @@ function HomePage({
 
           <div className="max-w-2xl mx-auto mb-6 sm:mb-8">
             <div className="border border-gray-200/90 p-5 sm:p-8 md:p-9 rounded-md bg-white shadow-sm flex flex-col justify-center">
+               
+               <div className="mb-4 p-2.5 rounded bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
+                 <span className="text-slate-500 font-medium">Tanlangan imtihon:</span>
+                 <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${isGMAT ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-[#1a446b]'}`}>
+                   {isGMAT ? 'GMAT™ (30 ta savol)' : 'GRE® Physics (100 ta savol)'}
+                 </span>
+               </div>
+
                <h3 className="text-sm sm:text-base md:text-[17px] font-bold text-[#1a446b] uppercase tracking-wider mb-4 sm:mb-5 flex items-center gap-2 sm:gap-2.5 pb-3 border-b border-gray-100">
                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-[#1a446b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -97,7 +133,7 @@ function HomePage({
                type="button"
                onClick={handleStartExam} 
                disabled={isSubmitting}
-               className={`w-full sm:w-auto text-white px-8 py-3.5 sm:px-12 sm:py-4 rounded-md font-bold tracking-widest text-xs sm:text-sm md:text-[15px] transition-all flex items-center justify-center gap-2.5 ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#1a446b] hover:bg-[#153655] hover:shadow-lg hover:-translate-y-0.5'}`}
+               className={`w-full sm:w-auto text-white px-8 py-3.5 sm:px-12 sm:py-4 rounded-md font-bold tracking-widest text-xs sm:text-sm md:text-[15px] transition-all flex items-center justify-center gap-2.5 ${isSubmitting ? 'bg-gray-400 cursor-not-allowed' : `${btnBg} hover:shadow-lg hover:-translate-y-0.5`}`}
              >
                <svg className="w-5 h-5 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />

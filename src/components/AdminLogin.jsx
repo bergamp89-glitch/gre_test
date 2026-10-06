@@ -75,7 +75,7 @@ export default function AdminLogin({ adminCreds, onSuccess, onCancel }) {
             Admin Tizimiga Kirish
           </h1>
           <p className="text-xs text-blue-100/80 mt-1">
-            GRE Physics boshqaruv paneliga kirish uchun parolni kiriting
+            Practice Exam boshqaruv paneliga kirish uchun parolni kiriting
           </p>
         </div>
 
