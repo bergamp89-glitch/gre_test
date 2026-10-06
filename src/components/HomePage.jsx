@@ -57,14 +57,6 @@ function HomePage({
 
           <div className="max-w-2xl mx-auto mb-6 sm:mb-8">
             <div className="border border-gray-200/90 p-5 sm:p-8 md:p-9 rounded-md bg-white shadow-sm flex flex-col justify-center">
-               
-               <div className="mb-4 p-2.5 rounded bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
-                 <span className="text-slate-500 font-medium">Tanlangan imtihon:</span>
-                 <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${isGMAT ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-[#1a446b]'}`}>
-                   {isGMAT ? 'GMAT™ (30 ta savol)' : 'GRE® Physics (100 ta savol)'}
-                 </span>
-               </div>
-
                <h3 className="text-sm sm:text-base md:text-[17px] font-bold text-[#1a446b] uppercase tracking-wider mb-4 sm:mb-5 flex items-center gap-2 sm:gap-2.5 pb-3 border-b border-gray-100">
                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-[#1a446b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
