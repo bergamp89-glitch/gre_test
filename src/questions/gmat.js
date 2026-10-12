@@ -1603,5 +1603,406 @@ export const gmatQuestions = [
     ],
     "correctAnswers": ["D"],
     "explanation": "Entrepreneurial Orientation (EO) describes the overarching mindset, processes, and behavior that combine diverse capabilities and resources to pursue new value creation."
+  },
+  {
+    "id": 106,
+    "prompt": "The infinite sequence a1, a2, ... is such that an = an-2 + an-1 for all n > 2. If a1 = 5 and a5 = 7, what is the value of a2?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "-3" },
+      { "id": "B", "text": "-1" },
+      { "id": "C", "text": "1" },
+      { "id": "D", "text": "2" },
+      { "id": "E", "text": "3" }
+    ],
+    "correctAnswers": ["B"],
+    "explanation": "Ketma-ketlik qoidasiga ko'ra a2 = x deb olsak: a3 = 5 + x, a4 = 5 + 2x, a5 = 10 + 3x. Shartga ko'ra a5 = 7 bo'lgani uchun: 10 + 3x = 7 => 3x = -3 => x = -1. Demak, a2 = -1."
+  },
+  {
+    "id": 107,
+    "prompt": "In economy mode, a printer prints twice as fast as it does in optimal quality mode. If, after operating for 20 minutes in optimal quality mode and 40 minutes in economy mode, the printer produces 120 pages, how long would it take for the printer to print 120 pages solely in optimal quality mode?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "35 minutes" },
+      { "id": "B", "text": "40 minutes" },
+      { "id": "C", "text": "50 minutes" },
+      { "id": "D", "text": "1 hour 20 minutes" },
+      { "id": "E", "text": "1 hour 40 minutes" }
+    ],
+    "correctAnswers": ["E"],
+    "explanation": "Optimal rejimdagi tezlik v sahifa/daqiqa bo'lsin. Tejamkor (economy) rejimdagi tezlik 2v bo'ladi. 20v + 40(2v) = 120 => 100v = 120 => v = 1.2 sahifa/daqiqa. Faqat optimal rejimda 120 sahifani chop etish uchun kerakli vaqt: 120 / 1.2 = 100 daqiqa, ya'ni 1 soat 40 daqiqa."
+  },
+  {
+    "id": 108,
+    "prompt": "Five knights are to be seated at a round table. How many different seating arrangements are possible, given that two seating arrangements are considered different only when the positions of the people are different relative to each other?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "120" },
+      { "id": "B", "text": "96" },
+      { "id": "C", "text": "60" },
+      { "id": "D", "text": "35" },
+      { "id": "E", "text": "24" }
+    ],
+    "correctAnswers": ["E"],
+    "explanation": "Aylana stol atrofida n ta kishini joylashtirishda o'rinlarning o'zaro nisbiy farqi (doiraviy permutatsiya) formulasi: (n - 1)!. 5 ta ritsar uchun: (5 - 1)! = 4! = 4 * 3 * 2 * 1 = 24 xil joylashtirish usuli mavjud."
+  },
+  {
+    "id": 109,
+    "prompt": "How many integers are there between 1 and 1000, inclusive, that are not divisible by either 11 or 35?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "884" },
+      { "id": "B", "text": "890" },
+      { "id": "C", "text": "892" },
+      { "id": "D", "text": "910" },
+      { "id": "E", "text": "945" }
+    ],
+    "correctAnswers": ["A"],
+    "explanation": "1 dan 1000 gacha sonlar ichida: 11 ga bo'linadiganlar soni floor(1000/11) = 90 ta; 35 ga bo'linadiganlar soni floor(1000/35) = 28 ta; har ikkalasiga (EKUK(11, 35) = 385 ga) bo'linadiganlar soni floor(1000/385) = 2 ta. 11 ga yoki 35 ga bo'linadiganlar soni: 90 + 28 - 2 = 116 ta. Demak, ikkalasiga ham bo'linmaydigan sonlar: 1000 - 116 = 884 ta."
+  },
+  {
+    "id": 110,
+    "prompt": "At a university, 40% of all students are members of both a chess club and a swim team. If 20% of swim team members are not members of the chess club, what percentage of all students are members of the swim team?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "20%" },
+      { "id": "B", "text": "30%" },
+      { "id": "C", "text": "40%" },
+      { "id": "D", "text": "50%" },
+      { "id": "E", "text": "60%" }
+    ],
+    "correctAnswers": ["D"],
+    "explanation": "Suzish jamoasi a'zolarining 100% - 20% = 80% i shaxmat klubiga ham a'zo. Bu butun talabalar sonining 40% iga teng. 0.80 * S = 0.40 * T => S / T = 0.40 / 0.80 = 50%. Demak, barcha talabalarning 50% i suzish jamoasi a'zosi."
+  },
+  {
+    "id": 111,
+    "prompt": "A chef visited a market to purchase some eggs and paid $12 for them. However, as the eggs were smaller than expected, the chef convinced the seller to add two more eggs to the purchase, free of cost. As a result of this, the price per dozen of eggs decreased by one dollar. How many eggs did the chef purchase at the market, including the two free eggs?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "8" },
+      { "id": "B", "text": "12" },
+      { "id": "C", "text": "15" },
+      { "id": "D", "text": "16" },
+      { "id": "E", "text": "18" }
+    ],
+    "correctAnswers": ["E"],
+    "explanation": "Dastlabki tuxumlar soni x bo'lsin. 1 o'n ikkitalik (dozen) tuxum narxi dastlab 12 * (12/x) = 144/x dollar bo'ladi. 2 ta bepul tuxum qo'shilgach, dozen narxi 144/(x + 2) dollar bo'ldi. 144/x - 144/(x + 2) = 1 => x(x + 2) = 288 => x^2 + 2x - 288 = 0 => (x + 18)(x - 16) = 0 => x = 16. Jami olingan tuxumlar (bepul berilgan 2 ta tuxum bilan birga): 16 + 2 = 18 ta."
+  },
+  {
+    "id": 112,
+    "prompt": "What is the value of the following expression?\n\n[ (1/8) * (1/16)^2 * 4^4 ] / [ (1/64)^(1/2) * 2^(-4) ]",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "16" },
+      { "id": "B", "text": "4" },
+      { "id": "C", "text": "2" },
+      { "id": "D", "text": "1/2" },
+      { "id": "E", "text": "1/16" }
+    ],
+    "correctAnswers": ["A"],
+    "explanation": "Barcha ko'paytuvchilarni 2 ning darajalari shaklida yozamiz: Surat = 2^(-3) * (2^(-4))^2 * (2^2)^4 = 2^(-3) * 2^(-8) * 2^8 = 2^(-3). Maxraj = ((1/64)^(1/2)) * 2^(-4) = (2^(-6))^(1/2) * 2^(-4) = 2^(-3) * 2^(-4) = 2^(-7). Natija = 2^(-3) / 2^(-7) = 2^(-3 - (-7)) = 2^4 = 16."
+  },
+  {
+    "id": 113,
+    "prompt": "If x^2 < 81 and y^2 < 25, what is the largest prime number that can be equal to x - 2y?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "3" },
+      { "id": "B", "text": "7" },
+      { "id": "C", "text": "11" },
+      { "id": "D", "text": "13" },
+      { "id": "E", "text": "17" }
+    ],
+    "correctAnswers": ["E"],
+    "explanation": "x^2 < 81 dan -9 < x < 9 va y^2 < 25 dan -5 < y < 5 (ya'ni -10 < -2y < 10) kelib chiqadi. Demak, x - 2y < 9 + 10 = 19. 19 dan qat'iy kichik eng katta tub son 17 dir. Bu qiymatga erishish mumkin (masalan x = 8 va y = -4.5 bo'lganda, x - 2y = 8 - 2(-4.5) = 17 bo'ladi, x va y butun son bo'lishi shart emas). Demak, eng katta tub son 17."
+  },
+  {
+    "id": 114,
+    "prompt": "If x = (x^3 + 6x^2)^(1/4), what is the sum of all possible values of x?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "-2" },
+      { "id": "B", "text": "0" },
+      { "id": "C", "text": "1" },
+      { "id": "D", "text": "3" },
+      { "id": "E", "text": "5" }
+    ],
+    "correctAnswers": ["D"],
+    "explanation": "To'rtinchi darajali asosiy ildiz manfiy bo'lmagani sababli x >= 0 bo'lishi shart. Ikkala tomonni 4-darajaga oshiramiz: x^4 = x^3 + 6x^2 => x^2(x^2 - x - 6) = 0 => x^2(x - 3)(x + 2) = 0. Ildizlar: x = 0, x = 3, x = -2. x >= 0 sharti tufayli -2 dastlabki tenglamaga mos kelmaydi. Haqiqiy yechimlar 0 va 3 bo'lib, ularning yig'indisi: 0 + 3 = 3."
+  },
+  {
+    "id": 115,
+    "prompt": "If 2^98 = 256 * m + n, where m and n are integers and 0 <= n <= 4, what is the value of n?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "0" },
+      { "id": "B", "text": "1" },
+      { "id": "C", "text": "2" },
+      { "id": "D", "text": "3" },
+      { "id": "E", "text": "4" }
+    ],
+    "correctAnswers": ["A"],
+    "explanation": "256 = 2^8 bo'lgani uchun 2^98 = 2^8 * 2^90 = 256 * 2^90. Chap tomon 256 ga qoldiqsiz bo'linadi. 0 <= n <= 4 oraliqda 256 ga bo'linadigan yagona butun son 0 dir. Demak, n = 0."
+  },
+  {
+    "id": 116,
+    "prompt": "If m is three times n, and if 2n + 3 is 20% of 25, what is the value of m?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "1" },
+      { "id": "B", "text": "2" },
+      { "id": "C", "text": "3" },
+      { "id": "D", "text": "6" },
+      { "id": "E", "text": "12" }
+    ],
+    "correctAnswers": ["C"],
+    "explanation": "25 ning 20% i: 0.20 * 25 = 5. Shartga ko'ra: 2n + 3 = 5 => 2n = 2 => n = 1. m = 3n bo'lgani sababli: m = 3 * 1 = 3."
+  },
+  {
+    "id": 117,
+    "prompt": "If (|p|!)^p = |p|!, which of the following could be true?\nI. p = -1\nII. p = 0\nIII. p = 1",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "I only" },
+      { "id": "B", "text": "II only" },
+      { "id": "C", "text": "III only" },
+      { "id": "D", "text": "II and III only" },
+      { "id": "E", "text": "I, II and III" }
+    ],
+    "correctAnswers": ["E"],
+    "explanation": "0! = 1 va 1! = 1 qoidalaridan foydalanamiz:\np = -1 bo'lsa: (|-1|!)^(-1) = (1!)^(-1) = 1^(-1) = 1 va |-1|! = 1. Tenglik to'g'ri.\np = 0 bo'lsa: (|0|!)^0 = (0!)^0 = 1^0 = 1 va |0|! = 1. Tenglik to'g'ri.\np = 1 bo'lsa: (|1|!)^1 = (1!)^1 = 1^1 = 1 va |1|! = 1. Tenglik to'g'ri.\nDemak, uchala holat (I, II va III) ham to'g'ri."
+  },
+  {
+    "id": 118,
+    "prompt": "Which of the following is equal to the square of 5^(√2)?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "5^2" },
+      { "id": "B", "text": "25^(√2)" },
+      { "id": "C", "text": "25" },
+      { "id": "D", "text": "25^(2√2)" },
+      { "id": "E", "text": "5^((√2)^2)" }
+    ],
+    "correctAnswers": ["B"],
+    "explanation": "Darajani darajaga oshirish qoidasiga ko'ra darajalar o'zaro ko'paytiriladi: (5^(√2))^2 = 5^(2√2) = (5^2)^(√2) = 25^(√2)."
+  },
+  {
+    "id": 119,
+    "prompt": "If a fraction of a 50% alcohol solution is replaced with a 25% alcohol solution, resulting in a final solution with 30% alcohol, what is the fraction of the original solution that was replaced?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "3%" },
+      { "id": "B", "text": "20%" },
+      { "id": "C", "text": "66%" },
+      { "id": "D", "text": "75%" },
+      { "id": "E", "text": "80%" }
+    ],
+    "correctAnswers": ["E"],
+    "explanation": "Almashtirilgan ulushni t desak: 0.50(1 - t) + 0.25t = 0.30 => 0.50 - 0.25t = 0.30 => 0.25t = 0.20 => t = 0.80 = 80%. Demak, dastlabki eritmaning 80% qismi almashtirilgan."
+  },
+  {
+    "id": 120,
+    "prompt": "List S = {1, 2, 4, 5, 7, 8}. What is the number of non-empty subsets of S such that a subset does not contain two or more consecutive numbers?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "77" },
+      { "id": "B", "text": "48" },
+      { "id": "C", "text": "32" },
+      { "id": "D", "text": "27" },
+      { "id": "E", "text": "26" }
+    ],
+    "correctAnswers": ["E"],
+    "explanation": "Ketma-ket kelgan sonlar 3 ta mustaqil juftlikni hosil qiladi: (1, 2), (4, 5), (7, 8). Hech bir qism to'plam bir vaqtning o'zida ikkala ketma-ket sonni o'z ichiga ololmaydi. Demak, har bir juftlikdan 1-sonni, 2-sonni yoki hech birini tanlash mumkin (har biri uchun 3 ta variant). Jami to'plamlar: 3 * 3 * 3 = 27 ta. Bo'sh to'plamni chiqarib tashlaganda (non-empty sharti uchun): 27 - 1 = 26 ta."
+  },
+  {
+    "id": 121,
+    "prompt": "If a three-digit positive integer has its digits reversed, the resulting three-digit positive integer is less than the original integer by 297. How many such pairs are possible?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "3" },
+      { "id": "B", "text": "6" },
+      { "id": "C", "text": "7" },
+      { "id": "D", "text": "60" },
+      { "id": "E", "text": "70" }
+    ],
+    "correctAnswers": ["D"],
+    "explanation": "Asl son 100a + 10b + c, teskarisi 100c + 10b + a bo'lsin (a, c >= 1). (100a + 10b + c) - (100c + 10b + a) = 99(a - c) = 297 => a - c = 3. Mumkin bo'lgan (a, c) juftliklari: (4, 1), (5, 2), (6, 3), (7, 4), (8, 5), (9, 6) — jami 6 ta juftlik. O'rta raqam b uchun 10 ta raqam (0 dan 9 gacha) tanlovi mavjud. Demak, jami bunday sonlar juftliklari soni: 6 * 10 = 60 ta."
+  },
+  {
+    "id": 122,
+    "prompt": "A box contains 11 hats, out of which 6 are red hats and 5 are green hats. If two hats are selected randomly without replacement, what is the probability that at least one green hat will be selected?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "10/11" },
+      { "id": "B", "text": "8/11" },
+      { "id": "C", "text": "7/12" },
+      { "id": "D", "text": "5/13" },
+      { "id": "E", "text": "9/7" }
+    ],
+    "correctAnswers": ["B"],
+    "explanation": "Kamida bitta yashil shlyapa chiqishining teskari hodisasi — ikkala shlyapaning ham qizil bo'lishidir. P(ikkala qizil) = (6/11) * (5/10) = 30/110 = 3/11. Demak, kamida bitta yashil shlyapa tanlanish ehtimoli: P = 1 - 3/11 = 8/11."
+  },
+  {
+    "id": 123,
+    "prompt": "Achilles’s age is a 2-digit number ab and Hector’s age is a 2-digit number cd. The 4-digit number abcd is the square of an integer. In 11 years, Achilles’s age will be a 2-digit number xy and Hector’s age will be a 2-digit number wz. The 4-digit number xywz will also be the square of an integer. What is Achilles’s age now?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "18" },
+      { "id": "B", "text": "20" },
+      { "id": "C", "text": "22" },
+      { "id": "D", "text": "25" },
+      { "id": "E", "text": "30" }
+    ],
+    "correctAnswers": ["B"],
+    "explanation": "Dastlabki 4 xonali son u^2 bo'lsin. 11 yildan keyin yoshlar 11 tadan oshadi, yangi son v^2 = u^2 + 100*11 + 11 = u^2 + 1111 bo'ladi. v^2 - u^2 = (v - u)(v + u) = 1111 = 11 * 101. Bundan v - u = 11 va v + u = 101 => 2v = 112 => v = 56, u = 45. Dastlabki to'rt xonali son u^2 = 45^2 = 2025. Bu yerda ab = 20 va cd = 25. Demak, Achillesning hozirgi yoshi 20 da."
+  },
+  {
+    "id": 124,
+    "prompt": "A bar over a sequence of digits in a decimal indicates that the sequence repeats indefinitely. If m/n = 0.36(bar), where m and n are positive integers, what is the least possible value of m?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "3" },
+      { "id": "B", "text": "4" },
+      { "id": "C", "text": "7" },
+      { "id": "D", "text": "13" },
+      { "id": "E", "text": "22" }
+    ],
+    "correctAnswers": ["B"],
+    "explanation": "0.363636... davriy o'nli kasrni oddiy kasrga aylantiramiz: r = 0.363636... => 100r - r = 36 => 99r = 36 => r = 36/99 = 4/11. 4/11 qisqarmaydigan kasr bo'lgani uchun, eng kichik musbat surat m = 4."
+  },
+  {
+    "id": 125,
+    "prompt": "On a certain day, the first flight out of Phoenix airport had a delayed departure, while the next three flights departed on time. What is the minimum number of subsequent flights that must depart from Phoenix on time, to achieve an on-time departure rate of over 90% that day?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "6" },
+      { "id": "B", "text": "7" },
+      { "id": "C", "text": "9" },
+      { "id": "D", "text": "10" },
+      { "id": "E", "text": "11" }
+    ],
+    "correctAnswers": ["B"],
+    "explanation": "Dastlab 4 ta reysdan 3 tasi vaqtida jo'nagan. Keyingi k ta reys ham vaqtida jo'nasa: (3 + k) / (4 + k) > 0.90 => 3 + k > 3.6 + 0.9k => 0.1k > 0.6 => k > 6. Shartda 'over 90%' (90% dan yuqori) so'ralgan (k = 6 bo'lsa aynan 90% bo'ladi). Shuning uchun eng kichik butun qiymat k = 7."
+  },
+  {
+    "id": 126,
+    "prompt": "How many liters of pure alcohol need to be added to a 40-liter solution, which is 10% alcohol by volume, in order to double the alcohol proportion?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "4" },
+      { "id": "B", "text": "5" },
+      { "id": "C", "text": "10" },
+      { "id": "D", "text": "20" },
+      { "id": "E", "text": "40" }
+    ],
+    "correctAnswers": ["B"],
+    "explanation": "Dastlabki sof spirt miqdori: 40 * 0.10 = 4 litr. Spirt ulushini 2 baravar oshirish, ya'ni 20% ga yetkazish lozim. x litr sof spirt qo'shilganda: (4 + x) / (40 + x) = 0.20 => 4 + x = 8 + 0.2x => 0.8x = 4 => x = 5 litr."
+  },
+  {
+    "id": 127,
+    "prompt": "If x is a positive number and (1/2) * √x = 2x, what is the value of x?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "0" },
+      { "id": "B", "text": "1/16" },
+      { "id": "C", "text": "1/4" },
+      { "id": "D", "text": "1/2" },
+      { "id": "E", "text": "1" }
+    ],
+    "correctAnswers": ["B"],
+    "explanation": "(1/2) * √x = 2x. x > 0 bo'lgani uchun har ikki tomonni √x ga bo'lamiz: 1/2 = 2√x => √x = 1/4. Ikkala tomonni kvadratga ko'tarib x = 1/16 ekanini topamiz."
+  },
+  {
+    "id": 128,
+    "prompt": "Four people—Fritz, Luis, Alfred, and Werner—hold all the shares in Metropolis Corporation. Fritz owns 2/3 as many shares as the other three people together. For Luis, this ratio is 3/7; for Alfred, it is 4/11. The company distributes $3,600,000 in dividends in proportion to share ownership. How much does Werner receive?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "$90,000" },
+      { "id": "B", "text": "$100,000" },
+      { "id": "C", "text": "$120,000" },
+      { "id": "D", "text": "$180,000" },
+      { "id": "E", "text": "$240,000" }
+    ],
+    "correctAnswers": ["C"],
+    "explanation": "Jami aksiyalar ulushi T bo'lsin. Fritz: F / (T - F) = 2/3 => F = 2/5 T. Luis: L / (T - L) = 3/7 => L = 3/10 T. Alfred: A / (T - A) = 4/11 => A = 4/15 T. Uchalasining jami ulushi: 2/5 + 3/10 + 4/15 = 12/30 + 9/30 + 8/30 = 29/30 T. Demak, Wernerning ulushi: 1 - 29/30 = 1/30 T. Werner oladigan dividend: (1/30) * $3,600,000 = $120,000."
+  },
+  {
+    "id": 129,
+    "prompt": "Pool A and Pool B each have the same volume of water and are drained by Pipe X and Pipe Y, respectively. The draining rate of Pipe X is double that of Pipe Y. If, after t hours, the remaining volume of water in Pool A is two-thirds that of Pool B, how long, in terms of t, will it take for Pipe X to completely drain Pool A from its full volume?",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "t/2 hours" },
+      { "id": "B", "text": "t hours" },
+      { "id": "C", "text": "3t/2 hours" },
+      { "id": "D", "text": "2t hours" },
+      { "id": "E", "text": "3t hours" }
+    ],
+    "correctAnswers": ["D"],
+    "explanation": "Hovuzlar hajmi V bo'lsin. Pipe Y ning tezligi r, Pipe X ning tezligi 2r bo'ladi. t soatdan keyin qolgan suv hajmlari: Pool A uchun V - 2rt, Pool B uchun V - rt. Shartga ko'ra: V - 2rt = (2/3)(V - rt) => 3V - 6rt = 2V - 2rt => V = 4rt. Pipe X (tezligi 2r) Pool A ni to'liq bo'shatishi uchun ketadigan vaqt: V / (2r) = 4rt / (2r) = 2t soat."
+  },
+  {
+    "id": 130,
+    "prompt": "Jingle, an elf, traveled a total of 1,080 miles over the course of three days. Was his daily average (arithmetic mean) distance greater than the median of the distances he covered on these days?\n\n(1) The range of the distances Jingle covered over these days was equal to his daily average (arithmetic mean) distance.\n(2) On one of the days, Jingle covered 360 miles.",
+    "type": "MULTIPLE CHOICE",
+    "answersRequired": 1,
+    "shuffle": false,
+    "options": [
+      { "id": "A", "text": "Statement (1) ALONE is sufficient, but statement (2) alone is not sufficient." },
+      { "id": "B", "text": "Statement (2) ALONE is sufficient, but statement (1) alone is not sufficient." },
+      { "id": "C", "text": "BOTH statements TOGETHER are sufficient, but NEITHER statement ALONE is sufficient." },
+      { "id": "D", "text": "EACH statement ALONE is sufficient." },
+      { "id": "E", "text": "Statements (1) and (2) TOGETHER are NOT sufficient." }
+    ],
+    "correctAnswers": ["B"],
+    "explanation": "O'rtacha (mean) masofa: 1080 / 3 = 360 mil. Masofalar o'sish tartibida a <= b <= c bo'lsin (median = b). Savol: 360 > b mi?\n(1) Qamrov (range) c - a = 360 => c = a + 360. 2a + b = 720 => b = 720 - 2a. Masalan, a = 240 bo'lsa b = 240 (360 > 240, HA); a = 180 bo'lsa b = 360 (360 > 360 emas, YO'Q). Shuning uchun (1) yolg'iz o'zi yetarli emas.\n(2) Kunlardan birida Jingle 360 mil bosib o'tgan bo'lsa: a + b + c = 1080 bo'lib, uchtadan biri 360 bo'lsa, qolgan ikkitasining yig'indisi 720 bo'ladi. Demak, ulardan biri <= 360 va ikkinchisi >= 360 bo'lishi shart, bu esa 360 soni DOIMO median (b = 360) bo'lishini kafolatlaydi! 360 > 360 mi degan savolga qat'iy 'YO'Q' javobi chiqadi. Aniq javob olinganligi sababli Statement (2) ALONE is sufficient."
   }
 ];
+
