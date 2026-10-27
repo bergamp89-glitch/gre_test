@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 280" width="100%" height="100%">
+  <rect width="320" height="280" fill="#fcfcfd" rx="6"/>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <!-- Circular orbit radius r -->
+  <circle cx="160" cy="140" r="90" fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="4,4"/>
+
+  <!-- Star at center M -->
+  <circle cx="160" cy="140" r="10" fill="#0f172a"/>
+  <text x="140" y="145" font-family="serif" font-size="16" font-style="italic" font-weight="bold">M</text>
+
+  <!-- Radius vector r -->
+  <line x1="160" y1="140" x2="224" y2="76" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="195" y="115" font-family="serif" font-size="14" font-style="italic">r</text>
+
+  <!-- Planet 1 (top right) -->
+  <circle cx="224" cy="76" r="8" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
+  <text x="238" y="78" font-family="serif" font-size="15" font-style="italic">m</text>
+
+  <!-- Planet 2 (bottom left) -->
+  <circle cx="96" cy="204" r="8" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
+  <text x="76" y="215" font-family="serif" font-size="15" font-style="italic">m</text>
+
+  <!-- Orbital direction arrows -->
+  <path d="M 235 65 A 95 95 0 0 0 250 140" fill="none" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr)"/>
+</svg>

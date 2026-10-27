@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 260" width="100%" height="100%">
+  <rect width="460" height="260" fill="#fcfcfd" rx="6"/>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <!-- Left Graph Box -->
+  <rect x="70" y="30" width="200" height="150" fill="#ffffff" stroke="#0f172a" stroke-width="1.8"/>
+
+  <!-- Y axis ticks & labels -->
+  <line x1="65" y1="45" x2="70" y2="45" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="35" y="49" font-family="sans-serif" font-size="11">1.00</text>
+  <line x1="65" y1="95" x2="70" y2="95" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="35" y="99" font-family="sans-serif" font-size="11">0.90</text>
+  <line x1="65" y1="145" x2="70" y2="145" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="35" y="149" font-family="sans-serif" font-size="11">0.80</text>
+  <text x="-115" y="20" font-family="sans-serif" font-size="12" transform="rotate(-90)" text-anchor="middle">Relative Count Rate</text>
+
+  <!-- X axis ticks (-4 to +4) -->
+  <text x="75" y="196" font-family="sans-serif" font-size="10">−4</text>
+  <text x="100" y="196" font-family="sans-serif" font-size="10">−3</text>
+  <text x="125" y="196" font-family="sans-serif" font-size="10">−2</text>
+  <text x="150" y="196" font-family="sans-serif" font-size="10">−1</text>
+  <text x="170" y="196" font-family="sans-serif" font-size="10">0</text>
+  <text x="195" y="196" font-family="sans-serif" font-size="10">1</text>
+  <text x="220" y="196" font-family="sans-serif" font-size="10">2</text>
+  <text x="245" y="196" font-family="sans-serif" font-size="10">3</text>
+  <text x="265" y="196" font-family="sans-serif" font-size="10">4</text>
+  <text x="170" y="218" font-family="sans-serif" font-size="12" text-anchor="middle">Velocity (mm/s)</text>
+
+  <!-- Mossbauer absorption curve with sharp dip at center (x=170) -->
+  <path d="M 72 48 Q 110 46 150 49 Q 165 52 168 145 Q 170 152 172 145 Q 175 52 190 49 Q 230 46 268 47" fill="none" stroke="#0f172a" stroke-width="2"/>
+
+  <!-- Right: Nuclear Energy Level Diagram for 57Fe -->
+  <g transform="translate(300, 30)">
+    <!-- 3/2- excited state -->
+    <line x1="10" y1="50" x2="90" y2="50" stroke="#0f172a" stroke-width="2"/>
+    <text x="2" y="44" font-family="sans-serif" font-size="11">3/2⁻</text>
+
+    <!-- 1/2- ground state -->
+    <line x1="10" y1="100" x2="90" y2="100" stroke="#0f172a" stroke-width="2"/>
+    <text x="2" y="96" font-family="sans-serif" font-size="11">1/2⁻</text>
+    <text x="50" y="120" font-family="sans-serif" font-size="12" font-weight="bold">⁵⁷Fe</text>
+
+    <!-- Transition arrow 14.4 keV -->
+    <line x1="50" y1="50" x2="50" y2="100" stroke="#0f172a" stroke-width="1.8" marker-end="url(#arr)"/>
+    <text x="58" y="75" font-family="sans-serif" font-size="12" font-weight="600">14.4 keV</text>
+  </g>
+</svg>

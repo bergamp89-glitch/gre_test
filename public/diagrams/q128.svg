@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 260" width="100%" height="100%">
+  <rect width="380" height="260" fill="#fcfcfd" rx="6"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0f172a"/>
+    </marker>
+    <marker id="blue-arr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <!-- Axes -->
+  <line x1="70" y1="210" x2="350" y2="210" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="70" y1="210" x2="70" y2="20" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="355" y="215" font-family="serif" font-size="15" font-style="italic">V (m³)</text>
+  <text x="30" y="25" font-family="serif" font-size="15" font-style="italic">P (Pa)</text>
+
+  <!-- Y ticks -->
+  <line x1="65" y1="170" x2="75" y2="170" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="25" y="174" font-family="sans-serif" font-size="12" fill="#334155">2,000</text>
+  <line x1="65" y1="110" x2="75" y2="110" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="25" y="114" font-family="sans-serif" font-size="12" fill="#334155">4,000</text>
+  <line x1="65" y1="50" x2="75" y2="50" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="25" y="54" font-family="sans-serif" font-size="12" fill="#334155">6,000</text>
+  <text x="55" y="222" font-family="sans-serif" font-size="12" fill="#334155">0</text>
+
+  <!-- X ticks -->
+  <line x1="130" y1="205" x2="130" y2="215" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="115" y="230" font-family="sans-serif" font-size="12" fill="#334155">0.01</text>
+  <line x1="200" y1="205" x2="200" y2="215" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="185" y="230" font-family="sans-serif" font-size="12" fill="#334155">0.02</text>
+  <line x1="270" y1="205" x2="270" y2="215" stroke="#0f172a" stroke-width="1.5"/>
+  <text x="255" y="230" font-family="sans-serif" font-size="12" fill="#334155">0.03</text>
+
+  <!-- Grid dashed lines -->
+  <line x1="70" y1="170" x2="270" y2="170" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+  <line x1="70" y1="50" x2="165" y2="50" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+  <line x1="165" y1="50" x2="165" y2="210" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+  <line x1="130" y1="170" x2="130" y2="210" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+  <line x1="270" y1="170" x2="270" y2="210" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+
+  <!-- Triangle cycle: 1 -> 2 -> 3 -> 1 -->
+  <!-- 1: (165, 50), 2: (270, 170), 3: (130, 170) -->
+  <polygon points="165,50 270,170 130,170" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+
+  <!-- Cycle direction arrows -->
+  <!-- 1 -> 2 arrow -->
+  <line x1="165" y1="50" x2="223" y2="116" stroke="#2563eb" stroke-width="2.5" marker-end="url(#blue-arr)"/>
+  <!-- 2 -> 3 arrow -->
+  <line x1="270" y1="170" x2="195" y2="170" stroke="#2563eb" stroke-width="2.5" marker-end="url(#blue-arr)"/>
+  <!-- 3 -> 1 arrow -->
+  <line x1="130" y1="170" x2="150" y2="101" stroke="#2563eb" stroke-width="2.5" marker-end="url(#blue-arr)"/>
+
+  <!-- Labels 1, 2, 3 -->
+  <text x="162" y="40" font-family="sans-serif" font-size="14" font-weight="bold" fill="#0f172a">1</text>
+  <text x="280" y="175" font-family="sans-serif" font-size="14" font-weight="bold" fill="#0f172a">2</text>
+  <text x="115" y="175" font-family="sans-serif" font-size="14" font-weight="bold" fill="#0f172a">3</text>
+</svg>

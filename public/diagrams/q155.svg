@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 200" width="100%" height="100%">
+  <rect width="460" height="200" fill="#fcfcfd" rx="6"/>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <!-- Horizontal Axis -->
+  <line x1="20" y1="130" x2="430" y2="130" stroke="#0f172a" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="435" y="135" font-family="serif" font-size="16" font-style="italic">x</text>
+
+  <!-- Vertical Axis -->
+  <line x1="220" y1="180" x2="220" y2="20" stroke="#0f172a" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="212" y="14" font-family="serif" font-size="16" font-style="italic">f(x)</text>
+
+  <!-- Triangular waveform: periodic with period 2π -->
+  <!-- Peaks at x = -3π, -π, +π, +3π (height 70, y = 60). Valleys at x = -2π, 0, +2π (y = 130). -->
+  <!-- Let 1π = 60px. x = 0 at 220. -->
+  <!-- -3π: 40 (peak) -->
+  <!-- -2π: 100 (valley) -->
+  <!-- -π: 160 (peak) -->
+  <!-- 0: 220 (valley) -->
+  <!-- +π: 280 (peak) -->
+  <!-- +2π: 340 (valley) -->
+  <!-- +3π: 400 (peak) -->
+  <polyline points="40,60 100,130 160,60 220,130 280,60 340,130 400,60" fill="none" stroke="#0f172a" stroke-width="2.5"/>
+
+  <!-- X axis tick labels -->
+  <text x="40" y="150" font-family="serif" font-size="13" text-anchor="middle">−3π</text>
+  <text x="100" y="150" font-family="serif" font-size="13" text-anchor="middle">−2π</text>
+  <text x="160" y="150" font-family="serif" font-size="13" text-anchor="middle">−π</text>
+  <text x="220" y="150" font-family="serif" font-size="13" text-anchor="middle">0</text>
+  <text x="280" y="150" font-family="serif" font-size="13" text-anchor="middle">+π</text>
+  <text x="340" y="150" font-family="serif" font-size="13" text-anchor="middle">+2π</text>
+  <text x="400" y="150" font-family="serif" font-size="13" text-anchor="middle">+3π</text>
+</svg>

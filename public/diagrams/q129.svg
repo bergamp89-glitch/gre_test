@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" width="100%" height="100%">
+  <rect width="360" height="260" fill="#fcfcfd" rx="6"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <!-- Axes -->
+  <line x1="60" y1="210" x2="310" y2="210" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="60" y1="210" x2="60" y2="30" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="315" y="215" font-family="serif" font-size="16" font-style="italic">V</text>
+  <text x="55" y="22" font-family="serif" font-size="16" font-style="italic">P</text>
+  <text x="45" y="225" font-family="serif" font-size="14" font-style="italic">O</text>
+
+  <!-- Initial point (90, 60) -->
+  <circle cx="90" cy="60" r="3.5" fill="#0f172a"/>
+
+  <!-- Process 1: Isobaric (horizontal line) -->
+  <line x1="90" y1="60" x2="220" y2="60" stroke="#0f172a" stroke-width="2"/>
+  <text x="180" y="50" font-family="sans-serif" font-size="14" font-weight="bold">1</text>
+
+  <!-- Process 2: Isothermal (moderate curve) -->
+  <path d="M 90 60 Q 130 110 220 140" fill="none" stroke="#0f172a" stroke-width="2"/>
+  <text x="175" y="115" font-family="sans-serif" font-size="14" font-weight="bold">2</text>
+
+  <!-- Process 3: Adiabatic (steeper curve) -->
+  <path d="M 90 60 Q 115 135 220 180" fill="none" stroke="#0f172a" stroke-width="2"/>
+  <text x="150" y="170" font-family="sans-serif" font-size="14" font-weight="bold">3</text>
+
+  <!-- Final volume vertical line -->
+  <line x1="220" y1="40" x2="220" y2="210" stroke="#cbd5e1" stroke-dasharray="4,4" stroke-width="1.5"/>
+</svg>

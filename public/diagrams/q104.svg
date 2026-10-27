@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 240" width="100%" height="100%">
+  <rect width="380" height="240" fill="#fcfcfd" rx="6"/>
+  <defs>
+    <marker id="circuit-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <!-- Left branch: 20 V DC voltage source -->
+  <line x1="80" y1="50" x2="80" y2="105" stroke="#0f172a" stroke-width="2"/>
+  <line x1="80" y1="135" x2="80" y2="190" stroke="#0f172a" stroke-width="2"/>
+  
+  <!-- DC Source plates (+ long, - short) -->
+  <line x1="62" y1="105" x2="98" y2="105" stroke="#0f172a" stroke-width="3"/>
+  <line x1="70" y1="135" x2="90" y2="135" stroke="#0f172a" stroke-width="3"/>
+  <text x="32" y="125" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0f172a">20 V</text>
+  <text x="50" y="102" font-family="sans-serif" font-size="14" fill="#0f172a">+</text>
+  <text x="52" y="148" font-family="sans-serif" font-size="16" fill="#0f172a">−</text>
+
+  <!-- Top wire with 1 ohm resistor -->
+  <line x1="80" y1="50" x2="130" y2="50" stroke="#0f172a" stroke-width="2"/>
+  <!-- Zigzag resistor 1 ohm -->
+  <polyline points="130,50 135,42 145,58 155,42 165,58 175,42 185,58 190,50" fill="none" stroke="#0f172a" stroke-width="2"/>
+  <text x="150" y="32" font-family="sans-serif" font-size="15" font-weight="600" fill="#0f172a">1 Ω</text>
+  <line x1="190" y1="50" x2="280" y2="50" stroke="#0f172a" stroke-width="2"/>
+
+  <!-- Parallel Branch 1: 1 ohm -->
+  <line x1="210" y1="50" x2="210" y2="85" stroke="#0f172a" stroke-width="2"/>
+  <polyline points="210,85 202,90 218,100 202,110 218,120 202,130 218,140 210,145" fill="none" stroke="#0f172a" stroke-width="2"/>
+  <line x1="210" y1="145" x2="210" y2="190" stroke="#0f172a" stroke-width="2"/>
+  <text x="175" y="120" font-family="sans-serif" font-size="15" font-weight="600" fill="#0f172a">1 Ω</text>
+
+  <!-- Parallel Branch 2: 2 ohm -->
+  <line x1="280" y1="50" x2="280" y2="85" stroke="#0f172a" stroke-width="2"/>
+  <polyline points="280,85 272,90 288,100 272,110 288,120 272,130 288,140 280,145" fill="none" stroke="#0f172a" stroke-width="2"/>
+  <line x1="280" y1="145" x2="280" y2="190" stroke="#0f172a" stroke-width="2"/>
+  <text x="245" y="120" font-family="sans-serif" font-size="15" font-weight="600" fill="#0f172a">2 Ω</text>
+
+  <!-- Bottom wire returning to source -->
+  <line x1="80" y1="190" x2="280" y2="190" stroke="#0f172a" stroke-width="2"/>
+
+  <!-- Connection dots -->
+  <circle cx="210" cy="50" r="3.5" fill="#0f172a"/>
+  <circle cx="210" cy="190" r="3.5" fill="#0f172a"/>
+
+  <!-- Current arrow i beside 2 ohm resistor -->
+  <line x1="310" y1="100" x2="310" y2="135" stroke="#2563eb" stroke-width="2" marker-end="url(#circuit-arrow)"/>
+  <text x="322" y="122" font-family="serif" font-size="18" font-style="italic" font-weight="bold" fill="#2563eb">i</text>
+</svg>

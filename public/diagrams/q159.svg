@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 220" width="100%" height="100%">
+  <rect width="480" height="220" fill="#fcfcfd" rx="6"/>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <!-- Left side: Franck Hertz tube schematic -->
+  <g transform="translate(10, 10)">
+    <!-- Glass tube envelope -->
+    <rect x="30" y="30" width="140" height="60" rx="20" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+    <text x="100" y="24" font-family="sans-serif" font-size="12" font-weight="bold" fill="#475569" text-anchor="middle">Gas</text>
+
+    <!-- Filament F -->
+    <line x1="50" y1="45" x2="50" y2="75" stroke="#ef4444" stroke-width="2"/>
+    <text x="40" y="42" font-family="serif" font-size="13" font-style="italic">F</text>
+
+    <!-- Grid G -->
+    <line x1="120" y1="40" x2="120" y2="80" stroke="#0f172a" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <text x="116" y="36" font-family="serif" font-size="13" font-style="italic">G</text>
+
+    <!-- Plate P -->
+    <line x1="150" y1="42" x2="150" y2="78" stroke="#0f172a" stroke-width="3"/>
+    <text x="154" y="42" font-family="serif" font-size="13" font-style="italic">P</text>
+
+    <!-- Electron arrow -->
+    <line x1="65" y1="60" x2="95" y2="60" stroke="#2563eb" stroke-width="1.8" marker-end="url(#arr)"/>
+    <text x="80" y="52" font-family="sans-serif" font-size="10" fill="#2563eb" text-anchor="middle">Electrons</text>
+
+    <!-- Voltage circuit below -->
+    <line x1="50" y1="75" x2="50" y2="130" stroke="#0f172a" stroke-width="1.5"/>
+    <line x1="50" y1="130" x2="95" y2="130" stroke="#0f172a" stroke-width="1.5"/>
+    <!-- Variable V source -->
+    <line x1="95" y1="122" x2="95" y2="138" stroke="#0f172a" stroke-width="2"/>
+    <line x1="102" y1="125" x2="102" y2="135" stroke="#0f172a" stroke-width="2"/>
+    <line x1="102" y1="130" x2="120" y2="130" stroke="#0f172a" stroke-width="1.5"/>
+    <line x1="120" y1="130" x2="120" y2="80" stroke="#0f172a" stroke-width="1.5"/>
+    <text x="95" y="152" font-family="serif" font-size="13" font-style="italic">V</text>
+  </g>
+
+  <!-- Right side: Current vs Voltage graph -->
+  <g transform="translate(260, 20)">
+    <line x1="30" y1="150" x2="190" y2="150" stroke="#0f172a" stroke-width="2" marker-end="url(#arr)"/>
+    <line x1="30" y1="150" x2="30" y2="20" stroke="#0f172a" stroke-width="2" marker-end="url(#arr)"/>
+    <text x="110" y="172" font-family="sans-serif" font-size="12" text-anchor="middle">Voltage V</text>
+    <text x="-85" y="15" font-family="sans-serif" font-size="12" transform="rotate(-90)" text-anchor="middle">Electric Current</text>
+
+    <!-- Franck Hertz periodic current curve -->
+    <path d="M 30 150 Q 55 130 65 95 Q 70 85 75 130 Q 95 105 105 70 Q 110 60 115 125 Q 130 90 142 45 Q 146 38 152 110" fill="none" stroke="#0f172a" stroke-width="2"/>
+
+    <!-- Peak labels -->
+    <text x="65" y="80" font-family="sans-serif" font-size="11" text-anchor="middle">4.9 V</text>
+    <text x="105" y="55" font-family="sans-serif" font-size="11" text-anchor="middle">9.8 V</text>
+    <text x="142" y="32" font-family="sans-serif" font-size="11" text-anchor="middle">14.7 V</text>
+
+    <!-- X axis ticks -->
+    <text x="30" y="162" font-family="sans-serif" font-size="11" text-anchor="middle">0</text>
+    <text x="65" y="162" font-family="sans-serif" font-size="11" text-anchor="middle">5</text>
+    <text x="105" y="162" font-family="sans-serif" font-size="11" text-anchor="middle">10</text>
+    <text x="142" y="162" font-family="sans-serif" font-size="11" text-anchor="middle">15</text>
+  </g>
+</svg>

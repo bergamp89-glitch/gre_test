@@ -273,22 +273,39 @@ function App() {
 
   useEffect(() => {
     async function loadQuestions() {
+      // Agar GRE tanlangan bo'lsa va mavjud sessiyada eski 100 ta savol bo'lsa, qolgan yangi savollarni (101-200) ulaymiz
+      if (appState === 'EXAM' && selectedExam === 'GRE' && questions.length > 0 && questions.length < q1.length) {
+        const remainingRaw = q1.slice(questions.length);
+        const additionalNormalized = remainingRaw.map((q, idx) => {
+          let normalizedQ = JSON.parse(JSON.stringify(q));
+          normalizedQ.id = questions.length + idx + 1;
+          if (normalizedQ.type === 'SINGLE CHOICE') normalizedQ.type = 'MULTIPLE CHOICE';
+          return {
+            ...normalizedQ,
+            userAnswers: (normalizedQ.type === 'INSTRUCTION SET' || normalizedQ.type === 'MATCHING TASK') ? {} : [],
+            status: 'Not Started'
+          };
+        });
+        setQuestions(prev => [...prev, ...additionalNormalized]);
+        return;
+      }
+
       if (appState === 'EXAM' && questions.length === 0) {
         let rawQuestions = [];
 
         if (selectedExam === 'GMAT') {
           rawQuestions = gmatQuestions;
         } else {
-          // GRE: Avval bazadan yuklashga urinib ko'ramiz, agar bo'lmasa lokal fayldan olamiz
+          // GRE: Avval bazadan yuklashga urinib ko'ramiz, agar to'liq 200 ta bo'lsa bazadan, bo'lmasa lokal fayldan olamiz
           const { data, error } = await supabase
             .from(TABLES.QUESTIONS)
             .select('*')
             .order('id', { ascending: true });
 
-          if (!error && data && data.length >= 100) {
+          if (!error && data && data.length >= q1.length) {
             rawQuestions = data.map(dbQ => ({ id: dbQ.id, prompt: dbQ.prompt, type: dbQ.type, ...dbQ.data }));
           } else {
-            // Bazada to'liq 100 savol bo'lmasa yoki ulanish bo'lmasa — 100 talik rasmiy GRE Physics testini lokal yuklaymiz
+            // Bazada to'liq savollar bo'lmasa yoki ulanish bo'lmasa — to'liq 200 talik rasmiy GRE Physics testini lokal yuklaymiz
             rawQuestions = q1;
           }
         }
@@ -1109,7 +1126,9 @@ function App() {
             <h1 className="text-[14px] md:text-[16px] font-semibold tracking-wide">
               {selectedExam === 'GMAT' 
                 ? `GMAT Exam — ${questions.length}-Question Workspace`
-                : `GRE Physics (GR0877) — ${questions.length}-Question Workspace`}
+                : questions.length > 100
+                  ? `GRE Physics (GR0877 & GR1777) — ${questions.length}-Question Workspace`
+                  : `GRE Physics (GR0877) — ${questions.length}-Question Workspace`}
             </h1>
             {registration?.isSuperUser && (
               <span className="text-[10px] bg-amber-400 text-slate-900 font-extrabold px-2 py-0.5 rounded tracking-wider uppercase shadow-sm">
@@ -1144,7 +1163,7 @@ function App() {
           className={`flex-1 py-2 text-[11px] font-bold uppercase tracking-wider flex justify-center items-center gap-2 transition-colors ${mobileSidebar === 'nav' ? 'text-[#1a446b] border-b-2 border-[#1a446b] bg-blue-50/30' : 'text-gray-500 hover:bg-gray-50'}`}
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-          Task Navigation (1-100)
+          Task Navigation (1-{questions.length})
         </button>
       </div>
 

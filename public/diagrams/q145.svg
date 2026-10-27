@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 200" width="100%" height="100%">
+  <rect width="380" height="200" fill="#fcfcfd" rx="6"/>
+  
+  <!-- Energy level E > 0 (dashed line) -->
+  <line x1="40" y1="40" x2="340" y2="40" stroke="#2563eb" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="350" y="44" font-family="serif" font-size="16" font-style="italic" fill="#2563eb">E</text>
+
+  <!-- Zero energy potential level -->
+  <line x1="40" y1="80" x2="160" y2="80" stroke="#0f172a" stroke-width="2.5"/>
+  <text x="25" y="85" font-family="sans-serif" font-size="14" fill="#0f172a">0</text>
+  
+  <!-- Well drop at x = 0 -->
+  <line x1="160" y1="80" x2="160" y2="140" stroke="#0f172a" stroke-width="2.5"/>
+  <line x1="160" y1="140" x2="260" y2="140" stroke="#0f172a" stroke-width="2.5"/>
+  <text x="110" y="145" font-family="serif" font-size="15" font-style="italic" fill="#0f172a">−V₀</text>
+
+  <!-- Well rise at x = L -->
+  <line x1="260" y1="140" x2="260" y2="80" stroke="#0f172a" stroke-width="2.5"/>
+  <line x1="260" y1="80" x2="340" y2="80" stroke="#0f172a" stroke-width="2.5"/>
+
+  <!-- Position tick marks and labels -->
+  <text x="145" y="165" font-family="serif" font-size="14" font-style="italic">x = 0</text>
+  <text x="256" y="165" font-family="serif" font-size="14" font-style="italic">L</text>
+
+  <!-- Region Labels -->
+  <text x="95" y="110" font-family="sans-serif" font-size="14" font-weight="600" fill="#475569">Region 1</text>
+  <text x="185" y="110" font-family="sans-serif" font-size="14" font-weight="600" fill="#475569">Region 2</text>
+  <text x="285" y="110" font-family="sans-serif" font-size="14" font-weight="600" fill="#475569">Region 3</text>
+</svg>

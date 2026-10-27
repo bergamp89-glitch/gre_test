@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 280" width="100%" height="100%">
+  <rect width="320" height="280" fill="#fcfcfd" rx="6"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0f172a"/>
+    </marker>
+  </defs>
+
+  <!-- Outer shell circle radius b -->
+  <circle cx="160" cy="140" r="100" fill="#e2e8f0" stroke="#0f172a" stroke-width="2.5"/>
+
+  <!-- Inner cavity circle radius a -->
+  <circle cx="160" cy="140" r="50" fill="#ffffff" stroke="#0f172a" stroke-width="2.5"/>
+
+  <!-- Center point charge Q -->
+  <circle cx="160" cy="140" r="4.5" fill="#0f172a"/>
+  <text x="142" y="145" font-family="serif" font-size="16" font-style="italic" font-weight="bold">Q</text>
+
+  <!-- Radius a arrow -->
+  <line x1="160" y1="140" x2="195" y2="105" stroke="#0f172a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="170" y="118" font-family="serif" font-size="15" font-style="italic">a</text>
+
+  <!-- Radius b arrow -->
+  <line x1="160" y1="140" x2="231" y2="211" stroke="#0f172a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="200" y="185" font-family="serif" font-size="15" font-style="italic">b</text>
+
+  <!-- Shell caption -->
+  <text x="160" y="260" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">Conducting shell (net charge q)</text>
+</svg>
